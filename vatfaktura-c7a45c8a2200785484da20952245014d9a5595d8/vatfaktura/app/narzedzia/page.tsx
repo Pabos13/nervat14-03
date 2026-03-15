@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
-import { Calculator, FileText, Zap, BarChart3, Users, ArrowRight } from 'lucide-react'
+import { Calculator, FileText, Zap, BarChart3, Users, ArrowRight, BookOpen } from 'lucide-react'
 import { AdSenseDisplay728x90, AdSenseDisplayAuto, AdSenseDisplay300x250 } from '@/components/adsense-banner'
 
 const tools = [
@@ -61,6 +61,78 @@ const tools = [
     borderColor: 'border-teal-500/30 hover:border-teal-500/60',
     iconColor: 'text-teal-400',
   },
+  {
+    title: 'Kalkulator Podatków',
+    description: 'Porównaj formy opodatkowania: PIT-37, podatek liniowy i skalę podatkową.',
+    icon: Calculator,
+    href: '/kalkulatory/kalkulator-podatków',
+    color: 'from-blue-600/20 to-cyan-600/20',
+    borderColor: 'border-blue-500/30 hover:border-blue-500/60',
+    iconColor: 'text-blue-400',
+  },
+  {
+    title: 'Kalkulator Kosztów Biznesu',
+    description: 'Analizuj rentowność biznesu, koszty stałe, zmienne i próg rentowności.',
+    icon: BarChart3,
+    href: '/kalkulatory/kalkulator-kosztów',
+    color: 'from-purple-600/20 to-pink-600/20',
+    borderColor: 'border-purple-500/30 hover:border-purple-500/60',
+    iconColor: 'text-purple-400',
+  },
+  {
+    title: 'Kalkulator Wynagrodzeń',
+    description: 'Oblicz pensję brutto/netto, PIT, ZUS i całkowite koszty dla pracodawcy.',
+    icon: Users,
+    href: '/kalkulatory/kalkulator-pracownika',
+    color: 'from-orange-600/20 to-red-600/20',
+    borderColor: 'border-orange-500/30 hover:border-orange-500/60',
+    iconColor: 'text-orange-400',
+  },
+  {
+    title: 'Generator Dokumentów',
+    description: 'Generuj profesjonalne umowy, regulaminy i dokumenty biznesowe.',
+    icon: FileText,
+    href: '/dokumenty/generator-umow',
+    color: 'from-green-600/20 to-emerald-600/20',
+    borderColor: 'border-green-500/30 hover:border-green-500/60',
+    iconColor: 'text-green-400',
+  },
+  {
+    title: 'Akademia VAT Faktura',
+    description: 'Bezpłatne kursy online o podatках, ZUS, KSEF i prowadzeniu biznesu.',
+    icon: BookOpen,
+    href: '/akademia/kursy',
+    color: 'from-indigo-600/20 to-purple-600/20',
+    borderColor: 'border-indigo-500/30 hover:border-indigo-500/60',
+    iconColor: 'text-indigo-400',
+  },
+  {
+    title: 'Asystent AI',
+    description: '24/7 dostępny bot odpowiadający na pytania o podatки, ZUS i biznes.',
+    icon: Zap,
+    href: '/asystent/chat',
+    color: 'from-pink-600/20 to-rose-600/20',
+    borderColor: 'border-pink-500/30 hover:border-pink-500/60',
+    iconColor: 'text-pink-400',
+  },
+  {
+    title: 'Dashboard Finansowy',
+    description: 'Analizuj przepływy pieniężne, monitoruj przychody i zaplanuj biznes.',
+    icon: Zap,
+    href: '/dashboard/analytics',
+    color: 'from-teal-600/20 to-cyan-600/20',
+    borderColor: 'border-teal-500/30 hover:border-teal-500/60',
+    iconColor: 'text-teal-400',
+  },
+  {
+    title: 'Katalog Specjalistów',
+    description: 'Znajdź doświadczonych doradców, księgowych, audytorów i ekspertów.',
+    icon: Users,
+    href: '/katalog-specjalistow',
+    color: 'from-violet-600/20 to-indigo-600/20',
+    borderColor: 'border-violet-500/30 hover:border-violet-500/60',
+    iconColor: 'text-violet-400',
+  },
 ]
 
 export default function NarzedziaPage() {
@@ -103,7 +175,7 @@ export default function NarzedziaPage() {
               Narzędzia
             </h1>
             <p className="text-lg text-blue-200/70 max-w-2xl mx-auto">
-              Kompletny zestaw bezpłatnych kalkulatorów i narzędzi do rozliczania się z podatkami
+              Kompleksowy ekosystem narzędzi: kalkulatory, generatory dokumentów, akademia, asystent AI, dashboard finansowy i katalog specjalistów. Wszystko dla Twojego biznesu.
             </p>
           </div>
 

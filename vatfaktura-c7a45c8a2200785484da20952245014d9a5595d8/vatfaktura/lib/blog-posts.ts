@@ -2,6 +2,7 @@ import { PIT_BLOG_POSTS } from './blog-posts-pit'
 import { EXTRA_BLOG_POSTS } from './blog-posts-extra'
 import { ZUS_BLOG_POSTS } from './blog-posts-zus'
 import { FOREIGNERS_BLOG_POSTS } from './blog-posts-for-foreigners'
+import { NEW_FEATURE_BLOG_POSTS } from './blog-posts-new-features'
 
 export interface BlogPost {
   id: string
@@ -18,6 +19,7 @@ export interface BlogPost {
 }
 
 export const BLOG_POSTS: BlogPost[] = [
+  ...NEW_FEATURE_BLOG_POSTS,
   {
     id: 'ksef-guide',
     title: 'Kompletny Przewodnik po KSEF - Krajowym Systemie e-Faktur 2026',

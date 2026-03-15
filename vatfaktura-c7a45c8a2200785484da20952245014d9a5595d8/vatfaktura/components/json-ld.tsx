@@ -7,7 +7,7 @@ export function JsonLd() {
         '@id': 'https://www.vatfaktura.pl/#website',
         'url': 'https://www.vatfaktura.pl',
         'name': 'VAT Faktura',
-        'description': 'Bezpłatny program do fakturowania i rozliczania PIT online. Faktury w 30 sekund, PIT-37, PIT-36, PIT-36L, PIT-28, PIT-38 z podpisem elektronicznym i wysyłką do urzędu skarbowego.',
+        'description': 'Bezpłatny program do fakturowania, rozliczania PIT, znajdowania urzędów i porad prawnych. Faktury w 30 sekund, PIT-37/36/36L/28/38 z podpisem elektronicznym, wyszukiwarka urzędów w 40 miastach Polski, darmowe porady prawne i terminarz wydaż.',
         'inLanguage': 'pl-PL',
         'potentialAction': {
           '@type': 'SearchAction',
@@ -47,6 +47,10 @@ export function JsonLd() {
           'Wysyłka e-Deklaracje do urzędu skarbowego',
           'UPO (Urzędowe Potwierdzenie Odbioru)',
           'Eksport PDF',
+          'Wyszukiwarka urzędów w 40 miastach Polski',
+          'Darmowe porady prawne i poradnia obywatelska',
+          'Terminarz ważnych dat urzędniczych',
+          'Mapy i dane kontaktowe urzędów',
           '100% bezpłatny'
         ],
         'aggregateRating': {
@@ -105,6 +109,76 @@ export function JsonLd() {
           'priceCurrency': 'PLN',
           'description': 'Rozliczenie PIT online 100% bezpłatnie — PIT-37, PIT-36, PIT-36L, PIT-28, PIT-38, PIT-39'
         }
+      },
+      {
+        '@type': 'GovernmentService',
+        '@id': 'https://www.vatfaktura.pl/#offices-service',
+        'name': 'Wyszukiwarka Urzędów i Porad Prawnych — VAT Faktura',
+        'description': 'Inteligentna wyszukiwarka urzędów publicznych, darmowych porad prawnych i terminiarza wydaż urzędniczych w 40 największych miastach Polski. Znajduj urzędy miasta, skarbowe, ZUS, poradnie obywatelskie i darmowe konsultacje dla przedsiębiorców.',
+        'url': 'https://www.vatfaktura.pl/urzedy-i-porady',
+        'provider': {
+          '@type': 'Organization',
+          'name': 'VAT Faktura',
+          'url': 'https://www.vatfaktura.pl'
+        },
+        'areaServed': {
+          '@type': 'Country',
+          'name': 'Polska'
+        },
+        'serviceType': [
+          'Government Services',
+          'Legal Services',
+          'Public Information',
+          'Civic Services'
+        ],
+        'availableChannel': {
+          '@type': 'ServiceChannel',
+          'serviceUrl': 'https://www.vatfaktura.pl/urzedy-i-porady',
+          'servicePhone': '+48727141252',
+          'availableLanguage': 'Polish'
+        },
+        'coverage': [
+          'Warszawa',
+          'Kraków',
+          'Łódź',
+          'Wrocław',
+          'Poznań',
+          'Gdańsk',
+          'Szczecin',
+          'Toruń',
+          'Kielce',
+          'Bydgoszcz',
+          'Radom',
+          'Zielona Góra',
+          'Rzeszów',
+          'Tarnów',
+          'Tychy',
+          'Gliwice',
+          'Zabrze',
+          'Chorzów',
+          'Rybnik',
+          'Opole',
+          'Piła',
+          'Suwałki',
+          'Słupsk',
+          'Grudziądz',
+          'Legnica',
+          'Lubin',
+          'Chelmno',
+          'Jastrzębie-Zdrój',
+          'Elbląg',
+          'Gdynia',
+          'Sopot',
+          'Częstochowa',
+          'Radomsko',
+          'Katowice',
+          'Sosnowiec',
+          'Dąbrowa Górnicza',
+          'Bytom',
+          'Mysłowice',
+          'Pabianice',
+          'Siedlce'
+        ]
       },
       {
         '@type': 'Organization',
@@ -236,24 +310,30 @@ export function JsonLd() {
           {
             '@type': 'ListItem',
             'position': 2,
+            'name': 'Urzędy i Porady',
+            'item': 'https://www.vatfaktura.pl/urzedy-i-porady'
+          },
+          {
+            '@type': 'ListItem',
+            'position': 3,
             'name': 'Rozlicz PIT',
             'item': 'https://www.vatfaktura.pl/dashboard/pit'
           },
           {
             '@type': 'ListItem',
-            'position': 3,
+            'position': 4,
             'name': 'FAQ',
             'item': 'https://www.vatfaktura.pl/faq'
           },
           {
             '@type': 'ListItem',
-            'position': 4,
+            'position': 5,
             'name': 'Blog',
             'item': 'https://www.vatfaktura.pl/blog'
           },
           {
             '@type': 'ListItem',
-            'position': 5,
+            'position': 6,
             'name': 'Cennik',
             'item': 'https://www.vatfaktura.pl/pricing'
           }

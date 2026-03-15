@@ -154,191 +154,40 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Social Proof Section */}
-        <section className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 pb-12">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-            <div className="bg-slate-800/50 border border-blue-500/20 rounded-xl p-4 sm:p-6 text-center hover:border-blue-400/40 transition-colors">
-              <div className="flex justify-center mb-3">
-                <div className="p-2 bg-blue-500/15 rounded-lg">
-                  <Users className="w-5 h-5 sm:w-6 sm:h-6 text-cyan-400" />
-                </div>
-              </div>
-              <div className="text-2xl sm:text-3xl font-black text-white mb-1">50 000+</div>
-              <div className="text-xs sm:text-sm text-blue-200/60">{t('home.users', language)}</div>
-            </div>
-            <div className="bg-slate-800/50 border border-blue-500/20 rounded-xl p-4 sm:p-6 text-center hover:border-blue-400/40 transition-colors">
-              <div className="flex justify-center mb-3">
-                <div className="p-2 bg-green-500/15 rounded-lg">
-                  <FileText className="w-5 h-5 sm:w-6 sm:h-6 text-green-400" />
-                </div>
-              </div>
-              <div className="text-2xl sm:text-3xl font-black text-white mb-1">2 000 000+</div>
-              <div className="text-xs sm:text-sm text-blue-200/60">{t('home.invoices', language)}</div>
-            </div>
-            <div className="bg-slate-800/50 border border-blue-500/20 rounded-xl p-4 sm:p-6 text-center hover:border-blue-400/40 transition-colors">
-              <div className="flex justify-center mb-3">
-                <div className="p-2 bg-yellow-500/15 rounded-lg">
-                  <Star className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-400" />
-                </div>
-              </div>
-              <div className="text-2xl sm:text-3xl font-black text-white mb-1">4.9/5</div>
-              <div className="text-xs sm:text-sm text-blue-200/60">{t('home.rating', language)}</div>
-            </div>
-            <div className="bg-slate-800/50 border border-blue-500/20 rounded-xl p-4 sm:p-6 text-center hover:border-blue-400/40 transition-colors">
-              <div className="flex justify-center mb-3">
-                <div className="p-2 bg-emerald-500/15 rounded-lg">
-                  <Award className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-400" />
-                </div>
-              </div>
-              <div className="text-2xl sm:text-3xl font-black text-white mb-1">100%</div>
-              <div className="text-xs sm:text-sm text-blue-200/60">{t('home.free', language)}</div>
-            </div>
-          </div>
-        </section>
-
-        {/* Affiliate Disclosure */}
-        <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
-          <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4 mb-6">
-            <p className="text-sm text-yellow-200/80 text-center">
-              <span className="font-semibold">{t('home.disclosure', language)}</span> {t('home.disclosureText', language)} <a href="/disclaimer" className="text-yellow-300 hover:text-yellow-200 underline">{t('home.moreInfo', language)}</a>
-            </p>
-          </div>
-
-          {/* AdSense — Leaderboard pod hero */}
-          <AdSenseDisplay728x90 />
-        </div>
-
-        {/* Features */}
-        <section id="features" className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-20 sm:py-28 md:py-32 relative">
-          <div className="relative z-10">
-            <div className="text-center mb-12 sm:mb-16 md:mb-20 space-y-4 sm:space-y-6">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-300 bg-clip-text text-transparent px-4">
-                {t('home.featuresTitle', language)}
-              </h2>
-              <p className="text-blue-200/70 text-center text-sm sm:text-base md:text-lg max-w-3xl mx-auto leading-relaxed px-4">
-                {t('home.featuresDesc', language)}
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 md:gap-8 lg:gap-10">
-              {[
-                {
-                  icon: Zap,
-                  titleKey: 'home.feature.quickCreate',
-                  descriptionKey: 'home.feature.quickCreateDesc',
-                  gradient: 'from-amber-600/20 to-orange-600/20',
-                  borderColor: 'border-amber-500/30 hover:border-amber-500/60'
-                },
-                {
-                  icon: Shield,
-                  titleKey: 'home.feature.secure',
-                  descriptionKey: 'home.feature.secureDesc',
-                  gradient: 'from-purple-600/20 to-pink-600/20',
-                  borderColor: 'border-purple-500/30 hover:border-purple-500/60'
-                },
-                {
-                  icon: FileText,
-                  titleKey: 'home.feature.pdf',
-                  descriptionKey: 'home.feature.pdfDesc',
-                  gradient: 'from-green-600/20 to-emerald-600/20',
-                  borderColor: 'border-green-500/30 hover:border-green-500/60'
-                },
-                {
-                  icon: TrendingUp,
-                  titleKey: 'home.feature.templates',
-                  descriptionKey: 'home.feature.templatesDesc',
-                  gradient: 'from-blue-600/20 to-cyan-600/20',
-                  borderColor: 'border-blue-500/30 hover:border-blue-500/60'
-                },
-                {
-                  icon: Clock,
-                  titleKey: 'home.feature.math',
-                  descriptionKey: 'home.feature.mathDesc',
-                  gradient: 'from-rose-600/20 to-red-600/20',
-                  borderColor: 'border-rose-500/30 hover:border-rose-500/60'
-                },
-                {
-                  icon: CheckCircle,
-                  titleKey: 'home.feature.professional',
-                  descriptionKey: 'home.feature.professionalDesc',
-                  gradient: 'from-indigo-600/20 to-purple-600/20',
-                  borderColor: 'border-indigo-500/30 hover:border-indigo-500/60'
-                },
-              ].map((feature, index) => (
-                <div key={index} className="group relative h-full">
-                  <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} rounded-xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-500`}></div>
-                  <div className={`relative h-full bg-slate-800/40 backdrop-blur-xl rounded-xl p-6 sm:p-7 md:p-8 border ${feature.borderColor} transition-all duration-500 group-hover:bg-slate-800/60 group-hover:shadow-2xl group-hover:shadow-blue-500/20 transform group-hover:-translate-y-2`}>
-                    <div className="flex flex-col h-full gap-4">
-                      <div className="relative">
-                        <feature.icon className="w-12 h-12 sm:w-14 sm:h-14 text-blue-300 group-hover:text-cyan-300 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6" />
-                        <div className="absolute inset-0 bg-blue-500/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition duration-500"></div>
-                      </div>
-                <div className="flex-grow">
-                  <h3 className="text-lg font-bold text-white mb-2">{t(feature.titleKey, language)}</h3>
-                  <p className="text-blue-200/70 text-sm leading-relaxed">{t(feature.descKey, language)}</p>
-                </div>
-                      <div className="h-1 bg-gradient-to-r from-blue-500/0 via-blue-500/50 to-blue-500/0 opacity-0 group-hover:opacity-100 transition-all duration-500 rounded-full"></div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* AdSense — Auto responsive po sekcji Features */}
-        <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
-          <AdSenseDisplayAuto />
-        </div>
-
-        {/* Załóż firmę online section */}
+        {/* Urzędy i Porady section */}
         <section className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-20 sm:py-28 md:py-32">
           <div className="relative group">
-            <div className="absolute inset-0 bg-gradient-to-r from-green-600/20 via-emerald-600/15 to-green-600/20 rounded-2xl blur-2xl opacity-0 group-hover:opacity-100 transition-all duration-700"></div>
-            <div className="relative overflow-hidden rounded-2xl border-2 border-green-500/30 bg-gradient-to-br from-green-900/20 via-slate-900/40 to-green-900/20 backdrop-blur-xl p-8 sm:p-12 md:p-16 group-hover:border-green-400/50 transition-all duration-500">
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 via-cyan-600/15 to-purple-600/20 rounded-2xl blur-2xl opacity-0 group-hover:opacity-100 transition-all duration-700"></div>
+            <div className="relative overflow-hidden rounded-2xl border-2 border-cyan-500/30 bg-gradient-to-br from-blue-900/20 via-slate-900/40 to-cyan-900/20 backdrop-blur-xl p-8 sm:p-12 md:p-16 group-hover:border-cyan-400/50 transition-all duration-500">
               <div className="relative z-10">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-2 h-8 bg-gradient-to-b from-green-400 to-emerald-400 rounded-full"></div>
-                  <span className="text-xs sm:text-sm font-bold tracking-widest text-green-300 uppercase">{t('home.newService', language)}</span>
-                </div>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
-                  <div className="space-y-6">
-                    <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight">
-                      <span className="bg-gradient-to-r from-green-300 to-emerald-300 bg-clip-text text-transparent">{t('home.companyTitle', language)}</span>
-                    </h3>
-                    
-                    <p className="text-base sm:text-lg text-blue-100/90 leading-relaxed">
-                      {t('home.companyDesc', language)}
-                    </p>
-                    
-                    <div className="space-y-3">
-                      {[
-                        t('home.companyList1', language),
-                        t('home.companyList2', language),
-                        t('home.companyList3', language),
-                        t('home.companyList4', language),
-                      ].map((item, idx) => (
-                        <div key={idx} className="flex items-center gap-3">
-                          <span className="text-green-400 font-bold">✓</span>
-                          <span className="text-blue-100">{item}</span>
-                        </div>
-                      ))}
+                <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-1.5 h-6 bg-gradient-to-b from-cyan-400 to-blue-400 rounded-full"></div>
+                      <span className="text-xs sm:text-sm font-bold tracking-widest text-cyan-300 uppercase">Nowe narzędzie</span>
                     </div>
-                    
-                    <Link href="/zaloz-firme-online">
-                      <Button className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 text-white font-bold px-8 py-3 text-base shadow-lg shadow-green-500/40 hover:shadow-green-500/60 transition-all flex items-center gap-2">
-                        {t('home.companyButton', language)}
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-cyan-400 via-blue-300 to-purple-300 bg-clip-text text-transparent mb-4 leading-tight">
+                      Urzędy i Porady Prawne
+                    </h2>
+                    <p className="text-blue-200/80 text-base sm:text-lg mb-4 leading-relaxed">
+                      Znajduj urzędy publiczne, darmowe porady prawne i ważne terminy w 40 największych miastach Polski. Wszystkie informacje w jednym miejscu - adresy, numery telefonów, godziny otwarcia i mapy lokalizacji.
+                    </p>
+                    <p className="text-blue-200/70 text-sm sm:text-base mb-6">
+                      Dostęp do Poradni Obywatelskich, OPP, bezpłatnych konsultacji dla przedsiębiorców, terminiarza PIT, ZUS, VAT i kSEF.
+                    </p>
+                    <Link href="/urzedy-i-porady">
+                      <Button className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold px-8 py-3 text-base shadow-lg shadow-cyan-500/40 hover:shadow-cyan-500/60 transition-all flex items-center gap-2">
+                        Otwórz wyszukiwarkę
                         <ArrowRight className="w-4 h-4" />
                       </Button>
                     </Link>
                   </div>
                   
-                  <div className="relative h-64 md:h-80 rounded-xl overflow-hidden border border-green-500/20 group-hover:border-green-500/40 transition-all">
-                    <div className="absolute inset-0 bg-gradient-to-br from-green-600/30 to-emerald-600/20 flex items-center justify-center">
+                  <div className="relative h-64 md:h-80 rounded-xl overflow-hidden border border-cyan-500/20 group-hover:border-cyan-500/40 transition-all flex-1">
+                    <div className="absolute inset-0 bg-gradient-to-br from-cyan-600/30 to-blue-600/20 flex items-center justify-center">
                       <div className="text-center">
-                        <Building2 className="w-16 h-16 sm:w-20 sm:h-20 text-green-300 mx-auto mb-4 opacity-80" />
-                        <p className="text-green-200 text-sm sm:text-base font-semibold">{t('home.companySubtitle', language)}</p>
+                        <Building2 className="w-16 h-16 sm:w-20 sm:h-20 text-cyan-300 mx-auto mb-4 opacity-80" />
+                        <p className="text-cyan-200 text-sm sm:text-base font-semibold">Inteligentne wyszukiwarki</p>
                       </div>
                     </div>
                   </div>
@@ -370,28 +219,28 @@ export default function Home() {
                 titleKey: 'home.newFeature1',
                 descKey: 'home.newFeature1Desc',
                 icon: Building2,
-                color: 'green'
+                color: 'green' as const
               },
               {
                 titleKey: 'home.newFeature2',
                 descKey: 'home.newFeature2Desc',
                 icon: FileText,
-                color: 'orange'
+                color: 'orange' as const
               },
               {
                 titleKey: 'home.newFeature3',
                 descKey: 'home.newFeature3Desc',
                 icon: Calculator,
-                color: 'emerald'
+                color: 'emerald' as const
               }
             ].map((feature, idx) => {
               const IconComponent = feature.icon
-              const colorClasses = {
+              const colorClasses: Record<'green' | 'orange' | 'emerald', string> = {
                 green: 'border-green-500/30 hover:border-green-500/60 bg-green-900/10 hover:bg-green-900/20',
                 orange: 'border-orange-500/30 hover:border-orange-500/60 bg-orange-900/10 hover:bg-orange-900/20',
                 emerald: 'border-emerald-500/30 hover:border-emerald-500/60 bg-emerald-900/10 hover:bg-emerald-900/20'
               }
-              const textColors = {
+              const textColors: Record<'green' | 'orange' | 'emerald', string> = {
                 green: 'text-green-400',
                 orange: 'text-orange-400',
                 emerald: 'text-emerald-400'

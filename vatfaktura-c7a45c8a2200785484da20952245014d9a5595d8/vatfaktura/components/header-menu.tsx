@@ -16,6 +16,7 @@ export function HeaderMenu() {
     { href: '/dashboard', labelKey: 'menu.invoice', icon: <FileText className="w-4 h-4" />, accent: 'blue' },
     { href: '/dashboard/pit', labelKey: 'menu.pit', icon: <Calculator className="w-4 h-4" />, accent: 'emerald' },
     { href: '/dashboard/zus', labelKey: 'menu.zus', icon: <Briefcase className="w-4 h-4" />, accent: 'orange' },
+    { href: '/urzedy-i-porady', labelKey: 'menu.offices', icon: <Building2 className="w-4 h-4" />, accent: 'cyan' },
   ]
 
   const handleMouseEnter = () => {
@@ -56,11 +57,13 @@ export function HeaderMenu() {
                       ? 'text-emerald-300 hover:text-emerald-100 hover:bg-emerald-500/15'
                       : item.accent === 'orange'
                       ? 'text-orange-300 hover:text-orange-100 hover:bg-orange-500/15'
+                      : item.accent === 'cyan'
+                      ? 'text-cyan-300 hover:text-cyan-100 hover:bg-cyan-500/15'
                       : 'text-blue-200/80 hover:text-white hover:bg-white/8'
                   }`}
                 >
                   <span className={`flex-shrink-0 transition-transform duration-150 group-hover:scale-110 ${
-                    item.accent === 'green' ? 'text-green-400' : item.accent === 'emerald' ? 'text-emerald-400' : item.accent === 'orange' ? 'text-orange-400' : 'text-blue-400/70'
+                    item.accent === 'green' ? 'text-green-400' : item.accent === 'emerald' ? 'text-emerald-400' : item.accent === 'orange' ? 'text-orange-400' : item.accent === 'cyan' ? 'text-cyan-400' : 'text-blue-400/70'
                   }`}>
                     {item.icon}
                   </span>
