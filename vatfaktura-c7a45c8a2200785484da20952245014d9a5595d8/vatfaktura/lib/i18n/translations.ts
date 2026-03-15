@@ -19,6 +19,7 @@ export const translations: Record<Language, Record<string, string>> = {
     'menu.invoice': 'Faktura',
     'menu.pit': 'PIT',
     'menu.zus': 'ZUS',
+    'menu.offices': 'Urzędy i Porady',
 
     // Hero Section
     'hero.title': 'Faktury, PIT, ZUS i Rejestracja Firmy Online',
@@ -186,6 +187,7 @@ export const translations: Record<Language, Record<string, string>> = {
     'menu.invoice': 'Рахунки',
     'menu.pit': 'Податки',
     'menu.zus': 'Соціальні внески',
+    'menu.offices': 'Офіси та Поради',
 
     // Hero Section
     'hero.title': 'Рахунки, Податки, Соціальні внески та Реєстрація ФОП',
@@ -288,7 +290,7 @@ export const translations: Record<Language, Record<string, string>> = {
     'home.step1Title': 'Зареєструйтеся',
     'home.step1Desc': 'Створіть безпаспортний рахунок за 30 секунд. Вам не потрібна кредитна карта чи будь-які дані.',
     'home.step2Title': 'Створіть рахунок',
-    'home.step2Desc': 'Заповніть дані одержувача, товари/послуги і готово. Система автоматично обчислить податок та суми.',
+    'home.step2Desc': 'Заповніть дані оде��жувача, товари/послуги і готово. Система автоматично обчислить податок та суми.',
     'home.step3Title': 'Надішліть або завантажте',
     'home.step3Desc': 'Надішліть рахунок електронною поштою або завантажте як PDF. Все автоматично зберігається в історії.',
 
