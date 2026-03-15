@@ -219,28 +219,28 @@ export default function Home() {
                 titleKey: 'home.newFeature1',
                 descKey: 'home.newFeature1Desc',
                 icon: Building2,
-                color: 'green'
+                color: 'green' as const
               },
               {
                 titleKey: 'home.newFeature2',
                 descKey: 'home.newFeature2Desc',
                 icon: FileText,
-                color: 'orange'
+                color: 'orange' as const
               },
               {
                 titleKey: 'home.newFeature3',
                 descKey: 'home.newFeature3Desc',
                 icon: Calculator,
-                color: 'emerald'
+                color: 'emerald' as const
               }
             ].map((feature, idx) => {
               const IconComponent = feature.icon
-              const colorClasses = {
+              const colorClasses: Record<'green' | 'orange' | 'emerald', string> = {
                 green: 'border-green-500/30 hover:border-green-500/60 bg-green-900/10 hover:bg-green-900/20',
                 orange: 'border-orange-500/30 hover:border-orange-500/60 bg-orange-900/10 hover:bg-orange-900/20',
                 emerald: 'border-emerald-500/30 hover:border-emerald-500/60 bg-emerald-900/10 hover:bg-emerald-900/20'
               }
-              const textColors = {
+              const textColors: Record<'green' | 'orange' | 'emerald', string> = {
                 green: 'text-green-400',
                 orange: 'text-orange-400',
                 emerald: 'text-emerald-400'
