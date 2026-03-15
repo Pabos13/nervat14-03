@@ -230,6 +230,85 @@ const companyFaqs = [
   },
 ]
 
+const calculatorFaqs = [
+  {
+    question: 'Jak korzystać z Kalkulatora Podatków?',
+    answer: 'Wpisz przychód roczny i kalkulator automatycznie obliczy podatki dla PIT-37, podatku liniowego i skali podatkowej. Możesz porównać wszystkie trzy formy i wybrać najkorzystniejszą dla Twojego biznesu.'
+  },
+  {
+    question: 'Czy Kalkulator Kosztów jest dokładny?',
+    answer: 'Kalkulator używa rzeczywistych stawek KUP dla poszczególnych branż. Szacuje rentowność biznesu, ale rzeczywiste wyniki mogą się różnić. Zawsze konsultuj z księgowym.'
+  },
+  {
+    question: 'Czy mogę pobrać wynik z kalkulatora?',
+    answer: 'Tak! Wszystkie kalkulatory mają funkcję pobierania raportu jako plik tekstowy. Możesz także skopiować wyniki bezpośrednio.'
+  },
+  {
+    question: 'Ile wynoszą stawki ZUS w kalkulatorze?',
+    answer: 'Kalkulator używa aktualnych stawek 2025-2026: ok. 30% dla przedsiębiorców na zasadach ogólnych, z możliwością obniżek dla "Małego ZUS Plus" czy ulg na start.'
+  },
+]
+
+const documentFaqs = [
+  {
+    question: 'Jakie szablony dokumentów są dostępne?',
+    answer: 'Mamy szablony: umowy B2B, umowy zlecenia, umowy o dzieło, politykę prywatności (RODO), regulamin sklepu internetowego i inne. Wszystkie szablony są gotowe do druku i zmian.'
+  },
+  {
+    question: 'Czy szablony są legalne?',
+    answer: 'Nasze szablony są wzorem poprawnych dokumentów opracowanymi przez ekspertów. Jednak zawsze zalecamy sprawdzenie u adwokata przed użyciem, szczególnie dla warunków specjalnych.'
+  },
+  {
+    question: 'Czy mogę edytować pobrane dokumenty?',
+    answer: 'Oczywiście! Pobierasz dokument w formacie tekstowym, który możesz edytować w Wordzie, dokumentach Google czy innym edytorze. Możesz dostosować go do swoich potrzeb.'
+  },
+]
+
+const academyFaqs = [
+  {
+    question: 'Czy kursy w Akademii są naprawdę darmowe?',
+    answer: 'Tak, wszystkie kursy w VAT Faktura Academy są całkowicie darmowe. Nie ma ukrytych opłat, abonamentów ani certyfikatów płatnych.'
+  },
+  {
+    question: 'Czy mogę otrzymać certyfikat po ukończeniu kursu?',
+    answer: 'Tak, po ukończeniu kursu i zaliczeniu quizu możesz pobrać certyfikat potwierdzający Twoją wiedzę. Certyfikat ma datę wydania i możesz go umieścić w swoim CV.'
+  },
+  {
+    question: 'Ile czasu trwa każdy kurs?',
+    answer: 'Kursy trwają od 80 do 150 minut w zależności od poziomu zaawansowania. Możesz uczyć się we własnym tempie - bez ograniczeń czasowych.'
+  },
+]
+
+const aiAssistantFaqs = [
+  {
+    question: 'Czy Asystent AI może odpowiadać na wszystkie pytania?',
+    answer: 'Asystent AI ma bazę wiedzy na temat podatków, ZUS, KSEF i zarządzania biznesem. Dla skomplikowanych spraw zalecamy konsultację z doradcą podatkowym.'
+  },
+  {
+    question: 'Czy rozmowy z Asystentem są prywatne?',
+    answer: 'Tak, Twoje rozmowy z Asystentem nie są przechowywane ani udostępniane. Dane są chronione i szyfrowane.'
+  },
+  {
+    question: 'Kiedy dostęp do Asystenta?',
+    answer: 'Asystent AI jest dostępny 24/7. Możesz zadawać pytania o każdej porze i otrzymywać odpowiedzi w kilka sekund.'
+  },
+]
+
+const catalogFaqs = [
+  {
+    question: 'Jak znaleźć specjalistę w moim mieście?',
+    answer: 'Użyj wyszukiwarki w Katalogu Specjalistów, wpisz miasto lub kategorię usługi. Wyfiltruje listę dostępnych specjalistów w Twojej lokalizacji.'
+  },
+  {
+    question: 'Czy mogę zaufać specjalistom z katalogu?',
+    answer: 'Wszyscy specjaliści w katalogu mają oceny i recenzje od rzeczywistych klientów. Wyświetlamy ich doświadczenie i liczbę obsłużonych spraw.'
+  },
+  {
+    question: 'Ile wynoszą opłaty za konsultacje?',
+    answer: 'Stawki każdego specjalisty są wyraźnie wyświetlone (np. 150-200 zł/h lub 2000 zł/miesiąc). Możesz skontaktować się bezpośrednio i uzgodnić warunki.'
+  },
+]
+
 function AccordionItem({
   question,
   answer,
@@ -541,6 +620,111 @@ export default function FAQPage() {
                 answer={faq.answer}
                 index={idx}
                 accent="blue"
+              />
+            ))}
+          </div>
+        </section>
+
+        {/* Calculators FAQ */}
+        <section id="kalkulatory" className="scroll-mt-20 mb-16">
+          <SectionHeader
+            icon={<Receipt className="w-5 h-5" />}
+            title="Kalkulatory"
+            count={calculatorFaqs.length}
+            accent="green"
+          />
+          <div className="space-y-2">
+            {calculatorFaqs.map((faq, idx) => (
+              <AccordionItem
+                key={idx}
+                question={faq.question}
+                answer={faq.answer}
+                index={idx}
+                accent="green"
+              />
+            ))}
+          </div>
+        </section>
+
+        {/* Documents FAQ */}
+        <section id="dokumenty" className="scroll-mt-20 mb-16">
+          <SectionHeader
+            icon={<FileText className="w-5 h-5" />}
+            title="Generator Dokumentów"
+            count={documentFaqs.length}
+            accent="emerald"
+          />
+          <div className="space-y-2">
+            {documentFaqs.map((faq, idx) => (
+              <AccordionItem
+                key={idx}
+                question={faq.question}
+                answer={faq.answer}
+                index={idx}
+                accent="emerald"
+              />
+            ))}
+          </div>
+        </section>
+
+        {/* Academy FAQ */}
+        <section id="akademia" className="scroll-mt-20 mb-16">
+          <SectionHeader
+            icon={<HelpCircle className="w-5 h-5" />}
+            title="Akademia VAT Faktura"
+            count={academyFaqs.length}
+            accent="blue"
+          />
+          <div className="space-y-2">
+            {academyFaqs.map((faq, idx) => (
+              <AccordionItem
+                key={idx}
+                question={faq.question}
+                answer={faq.answer}
+                index={idx}
+                accent="blue"
+              />
+            ))}
+          </div>
+        </section>
+
+        {/* AI Assistant FAQ */}
+        <section id="asystent" className="scroll-mt-20 mb-16">
+          <SectionHeader
+            icon={<Briefcase className="w-5 h-5" />}
+            title="Asystent AI"
+            count={aiAssistantFaqs.length}
+            accent="orange"
+          />
+          <div className="space-y-2">
+            {aiAssistantFaqs.map((faq, idx) => (
+              <AccordionItem
+                key={idx}
+                question={faq.question}
+                answer={faq.answer}
+                index={idx}
+                accent="orange"
+              />
+            ))}
+          </div>
+        </section>
+
+        {/* Catalog FAQ */}
+        <section id="katalog" className="scroll-mt-20 mb-16">
+          <SectionHeader
+            icon={<Building2 className="w-5 h-5" />}
+            title="Katalog Specjalistów"
+            count={catalogFaqs.length}
+            accent="green"
+          />
+          <div className="space-y-2">
+            {catalogFaqs.map((faq, idx) => (
+              <AccordionItem
+                key={idx}
+                question={faq.question}
+                answer={faq.answer}
+                index={idx}
+                accent="green"
               />
             ))}
           </div>
