@@ -72,7 +72,7 @@ export default function RegisterPage() {
       }
 
       if (data.token) {
-        const userData = {
+        localStorage.setItem('vatfaktura_user', JSON.stringify({
           id: data.userId,
           email: data.email,
           company: data.company,
@@ -80,13 +80,8 @@ export default function RegisterPage() {
           accountType: data.accountType,
           firstName: data.firstName,
           lastName: data.lastName,
-          subscription: {
-            ...data.subscription,
-            // Jeśli rejestruje się do Premium, nadaj mu od razu Premium plan
-            plan: planFromUrl === 'premium' ? 'premium' : data.subscription.plan
-          },
-        }
-        localStorage.setItem('vatfaktura_user', JSON.stringify(userData))
+          subscription: data.subscription,
+        }))
         localStorage.setItem('vatfaktura_auth_token', data.token)
       }
 
@@ -111,9 +106,11 @@ export default function RegisterPage() {
             window.location.href = checkoutData.checkoutUrl
             return
           } else {
-            setError(checkoutData.error || 'Failed to create checkout session')
+            console.error('[v0] Checkout error:', checkoutData.error)
+            setError(`Błąd checkout: ${checkoutData.error}. Upewnij się że Lemon Squeezy zmienne środowiskowe są ustawione (LEMON_SQUEEZY_API_KEY, LEMON_SQUEEZY_STORE_ID, LEMON_SQUEEZY_PREMIUM_PRODUCT_ID)`)
           }
         } catch (err) {
+          console.error('[v0] Checkout error:', err)
           setError('Error: ' + (err instanceof Error ? err.message : 'Unknown error'))
         }
       }

@@ -39,16 +39,19 @@ export default function PricingPage() {
         body: JSON.stringify({ plan: 'premium' }),
       })
 
+      const data = await response.json()
+      
       if (!response.ok) {
-        throw new Error('Failed to create checkout session')
+        console.error('[v0] Checkout error:', data.error)
+        throw new Error(data.error || 'Failed to create checkout session')
       }
 
-      const data = await response.json()
       if (data.checkoutUrl) {
         window.location.href = data.checkoutUrl
       }
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred')
+      console.error('[v0] Error:', err)
+      setError(err instanceof Error ? err.message : 'An error occurred. Make sure Lemon Squeezy environment variables are configured.')
       setIsLoading(false)
     }
   }

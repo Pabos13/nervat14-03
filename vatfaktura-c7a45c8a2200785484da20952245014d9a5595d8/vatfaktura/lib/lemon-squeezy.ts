@@ -36,23 +36,17 @@ export async function createLemonSqueezyCheckoutSession(
   userId: string,
   plan: 'premium'
 ): Promise<{ checkoutUrl: string; sessionId: string }> {
-  // TYMCZASOWO: Jeśli zmienne nie są configured, generuj fake checkout URL
-  if (!LEMON_SQUEEZY_API_KEY || !PRICING_PLANS.PREMIUM.lemonSqueezyProductId) {
-    console.warn('[v0] Lemon Squeezy not fully configured - using dev checkout URL')
-    
-    // Tworzymy mock checkout URL - w produkcji będzie Lemon Squeezy
-    const sessionId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
-    const checkoutUrl = `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/checkout-success?sessionId=${sessionId}&email=${encodeURIComponent(email)}&userId=${userId}`
-    
-    return {
-      checkoutUrl,
-      sessionId,
-    }
+  if (!LEMON_SQUEEZY_API_KEY) {
+    throw new Error('LEMON_SQUEEZY_API_KEY not configured - set it in environment variables')
   }
 
   const productId = PRICING_PLANS.PREMIUM.lemonSqueezyProductId
   if (!productId) {
-    throw new Error('LEMON_SQUEEZY_PREMIUM_PRODUCT_ID not configured')
+    throw new Error('LEMON_SQUEEZY_PREMIUM_PRODUCT_ID not configured - set it in environment variables')
+  }
+
+  if (!LEMON_SQUEEZY_STORE_ID) {
+    throw new Error('LEMON_SQUEEZY_STORE_ID not configured - set it in environment variables')
   }
 
   try {
