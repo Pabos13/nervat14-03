@@ -1,89 +1,88 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { Check } from 'lucide-react'
 import { useUser } from '@/hooks/useUser'
-import { SUBSCRIPTION_PLANS } from '@/lib/stripe'
+import { PRICING_PLANS } from '@/lib/lemon-squeezy'
+import { PricingCard } from '@/components/pricing-card'
 import Link from 'next/link'
+import { useState } from 'react'
 import { AdSenseDisplay728x90, AdSenseDisplayAuto } from '@/components/adsense-banner'
 
 export default function PricingPage() {
   const { user } = useUser()
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
-  const plans = [
-    SUBSCRIPTION_PLANS.free,
-    SUBSCRIPTION_PLANS.pro,
-    SUBSCRIPTION_PLANS.enterprise,
-  ]
+  const handleUpgradeToPremium = async () => {
+    if (!user) {
+      window.location.href = '/register'
+      return
+    }
+
+    setIsLoading(true)
+    setError(null)
+
+    try {
+      const response = await fetch('/api/lemon-squeezy/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ plan: 'premium' }),
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to create checkout session')
+      }
+
+      const data = await response.json()
+      if (data.checkoutUrl) {
+        window.location.href = data.checkoutUrl
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An error occurred')
+      setIsLoading(false)
+    }
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-8 sm:py-12 px-3 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12">
-          <div className="inline-block mb-4 px-3 sm:px-4 py-2 bg-green-500/20 border border-green-500/50 rounded-full">
-            <span className="text-xs sm:text-sm font-semibold text-green-300">100% BEZPŁATNIE ZAWSZE</span>
+          <div className="inline-block mb-4 px-3 sm:px-4 py-2 bg-blue-500/20 border border-blue-500/50 rounded-full">
+            <span className="text-xs sm:text-sm font-semibold text-blue-300">NOWY MODEL CENOWY</span>
           </div>
           <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3 sm:mb-4 px-2">
-            Wszystkie plany za darmo
+            Prosty i przejrzysty cennik
           </h1>
           <p className="text-sm sm:text-base md:text-lg text-slate-300 px-4">
-            Brak karty kredytowej, brak ukrytych opłat, brak limitów. Wszystkie funkcje dostępne dla każdego.
+            Zacznij z planem Podstawowym (5 faktur za darmo), a następnie przejdź na Premium dla nieograniczonych możliwości.
           </p>
         </div>
 
-        {/* Trust Signals */}
-        <div className="grid grid-cols-1 xs:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-12">
-          <div className="text-center">
-            <div className="text-2xl sm:text-3xl font-bold text-green-400 mb-2">∞</div>
-            <p className="text-xs sm:text-sm md:text-base text-slate-300">Nieograniczone faktury</p>
+        {error && (
+          <div className="mb-8 p-4 bg-red-500/20 border border-red-500/50 rounded-lg text-center text-red-300">
+            {error}
           </div>
-          <div className="text-center">
-            <div className="text-2xl sm:text-3xl font-bold text-green-400 mb-2">💳</div>
-            <p className="text-xs sm:text-sm md:text-base text-slate-300">Nigdy nie będzie karty kredytowej</p>
-          </div>
-          <div className="text-center">
-            <div className="text-2xl sm:text-3xl font-bold text-green-400 mb-2">🔓</div>
-            <p className="text-xs sm:text-sm md:text-base text-slate-300">Pełny dostęp do wszystkich funkcji</p>
-          </div>
-        </div>
+        )}
 
-        {/* Pricing Cards - All the Same */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mb-8 sm:mb-12">
-          {plans.map((plan) => (
-            <div
-              key={plan.id}
-              className="relative rounded-lg transition-all duration-300 bg-slate-800 border border-blue-500/30 hover:border-blue-500/50 shadow-lg"
-            >
-              <div className="p-4 sm:p-6 md:p-8">
-                {/* Plan Name */}
-                <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-2">{plan.name}</h3>
-
-                {/* Price - Always Free */}
-                <div className="mb-4 sm:mb-6">
-                  <span className="text-3xl sm:text-4xl md:text-5xl font-bold text-green-400">0 PLN</span>
-                  <span className="text-slate-400 ml-2 text-xs sm:text-sm">zawsze</span>
-                </div>
-
-                {/* CTA Button */}
-                <Link href={user ? '/dashboard' : '/register'} className="block w-full mb-4 sm:mb-8">
-                  <Button className="w-full min-h-[44px] text-xs sm:text-sm md:text-base font-semibold bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white">
-                    {user ? 'Przejdź do dashboardu' : 'Załóż konto'}
-                  </Button>
-                </Link>
-
-                {/* Features */}
-                <ul className="space-y-3 sm:space-y-4">
-                  {plan.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-start gap-2 sm:gap-3">
-                      <Check className="w-4 h-4 sm:w-5 sm:h-5 text-green-400 flex-shrink-0 mt-0.5" />
-                      <span className="text-slate-300 text-xs sm:text-sm">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          ))}
+        {/* Pricing Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-6 md:gap-8 mb-8 sm:mb-12 max-w-4xl mx-auto">
+          <PricingCard
+            name={PRICING_PLANS.BASIC.name}
+            price={PRICING_PLANS.BASIC.price}
+            description={PRICING_PLANS.BASIC.description}
+            features={PRICING_PLANS.BASIC.features}
+            isPurchased={user?.subscription?.plan === 'basic'}
+          />
+          <PricingCard
+            name={PRICING_PLANS.PREMIUM.name}
+            price={PRICING_PLANS.PREMIUM.price}
+            description={PRICING_PLANS.PREMIUM.description}
+            features={PRICING_PLANS.PREMIUM.features}
+            isPopular={true}
+            isPurchased={user?.subscription?.plan === 'premium' && user?.subscription?.subscriptionStatus === 'active'}
+            onSelectPlan={handleUpgradeToPremium}
+          />
         </div>
 
         {/* FAQ / Info Section */}
@@ -92,37 +91,44 @@ export default function PricingPage() {
           
           <div className="space-y-4 sm:space-y-6">
             <div>
-              <h3 className="text-sm sm:text-base md:text-lg font-semibold text-white mb-2">Czy zawsze będzie to bezpłatne?</h3>
+              <h3 className="text-sm sm:text-base md:text-lg font-semibold text-white mb-2">Co to jest plan Podstawowy?</h3>
               <p className="text-xs sm:text-sm text-slate-300">
-                Tak! VAT Faktura jest całkowicie bezpłatny. Naszą misją jest dostarczenie najlepszych narzędzi fakturowania dla każdego.
-              </p>
-            </div>
-            
-            <div>
-              <h3 className="text-lg font-semibold text-white mb-2">Czy jest limit na liczbę faktur?</h3>
-              <p className="text-slate-300">
-                Nie, możesz tworzyć nieograniczoną liczbę faktur bez żadnych ograniczeń.
-              </p>
-            </div>
-            
-            <div>
-              <h3 className="text-lg font-semibold text-white mb-2">Czy mogę eksportować faktury?</h3>
-              <p className="text-slate-300">
-                Oczywiście! Możesz eksportować do PDF, CSV i wysyłać bezpośrednio do kSEF.
+                Plan Podstawowy to idealne rozwiązanie dla nowych użytkowników. Otrzymasz 5 bezpłatnych faktur, aby przetestować aplikację. Licznik resetuje się dla każdego użytkownika niezależnie.
               </p>
             </div>
 
             <div>
-              <h3 className="text-sm sm:text-base md:text-lg font-semibold text-white mb-2">Jaka jest różnica między planami?</h3>
+              <h3 className="text-sm sm:text-base md:text-lg font-semibold text-white mb-2">Co mogę zrobić po wyczerpaniu 5 faktur?</h3>
               <p className="text-xs sm:text-sm text-slate-300">
-                Nie ma różnicy. Wszystkie plany zawierają identyczne funkcje. Wybierz ten, który ci się podoba!
+                Po wyczerpaniu limitu możesz przejść na plan Premium za 99 PLN/miesiąc. Dostajesz wtedy nieograniczoną liczbę faktur i dostęp do wszystkich funkcji.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="text-sm sm:text-base md:text-lg font-semibold text-white mb-2">Czy mogę anulować Premium w każdej chwili?</h3>
+              <p className="text-xs sm:text-sm text-slate-300">
+                Tak! Możesz anulować subskrypcję w dowolnym momencie bez kar. Po anulowaniu powrócisz do planu Podstawowego z 5 bezpłatnymi faktury z tego momentu.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="text-sm sm:text-base md:text-lg font-semibold text-white mb-2">Jakie są moje faktury sprzed zmiany cen?</h3>
+              <p className="text-xs sm:text-sm text-slate-300">
+                Faktury utworzone przed zmianą modelu cenowego nie liczą się do limitu 5 faktur. Liczy się tylko liczba faktur od dzisiaj.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="text-sm sm:text-base md:text-lg font-semibold text-white mb-2">Czy mogę korzystać z KSeF na obu planach?</h3>
+              <p className="text-xs sm:text-sm text-slate-300">
+                Tak! Integracja z KSeF (Krajowy System e-Faktur) jest dostępna na obu planach - zarówno Podstawowym jak i Premium.
               </p>
             </div>
 
             <div>
               <h3 className="text-sm sm:text-base md:text-lg font-semibold text-white mb-2">Jak portal się finansuje?</h3>
               <p className="text-xs sm:text-sm text-slate-300">
-                Zarabiamy prowizje z linków partnerskich (Wise, Stripe, Google Workspace). Dzięki tobie że wspierasz nasz projekt! <Link href="/#partners" className="text-cyan-400 hover:text-cyan-300 transition">Poznaj naszych partnerów →</Link>
+                Zarabiamy z dwóch źródeł: prowizji ze subskrypcji Premium (99 PLN/miesiąc) oraz prowizji z linków partnerskich (Wise, Stripe, Google Workspace). <Link href="/#partners" className="text-cyan-400 hover:text-cyan-300 transition">Poznaj naszych partnerów →</Link>
               </p>
             </div>
           </div>
@@ -136,12 +142,25 @@ export default function PricingPage() {
         {/* Footer CTA */}
         {!user && (
           <div className="text-center mt-12">
-            <p className="text-slate-300 mb-4">Gotow zacząć za darmo?</p>
+            <p className="text-slate-300 mb-4">Gotowy zacząć za darmo?</p>
             <Link href="/register">
-              <Button className="bg-green-600 hover:bg-green-700 text-white h-12 px-8 text-lg font-semibold">
+              <Button className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white h-12 px-8 text-lg font-semibold">
                 Zarejestruj się za darmo
               </Button>
             </Link>
+          </div>
+        )}
+        
+        {user && user.subscription?.plan === 'basic' && (
+          <div className="text-center mt-12">
+            <p className="text-slate-300 mb-4">Chcesz wybrać Premium?</p>
+            <Button
+              onClick={handleUpgradeToPremium}
+              disabled={isLoading}
+              className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white h-12 px-8 text-lg font-semibold disabled:opacity-50"
+            >
+              {isLoading ? 'Ładowanie...' : 'Przejdź na Premium'}
+            </Button>
           </div>
         )}
 

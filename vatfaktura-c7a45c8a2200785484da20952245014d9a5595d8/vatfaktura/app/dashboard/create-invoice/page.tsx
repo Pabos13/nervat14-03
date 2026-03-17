@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Card } from '@/components/ui/card'
 import { SubscriptionLimitAlert } from '@/components/subscription-limit-alert'
-import { checkSubscriptionLimit, getInvoiceCountThisMonth } from '@/lib/subscription-limits'
+import { checkSubscriptionLimit, getInvoiceCountAfterMigration } from '@/lib/subscription-limits'
 import { Plus, Trash2, ChevronLeft, Eye, Download, Printer, User, Building2, Info } from 'lucide-react'
 import Link from 'next/link'
 
@@ -51,9 +51,9 @@ export default function CreateInvoicePage() {
     
     if (user) {
       const userInvoices = invoices.filter(inv => inv.userId === user.id)
-      const count = getInvoiceCountThisMonth(userInvoices)
-      const planId = user.subscription?.plan || 'free'
-      const check = checkSubscriptionLimit(planId, count)
+      const count = getInvoiceCountAfterMigration(userInvoices, user.subscription.migrationDate)
+      const planType = user.subscription?.plan || 'basic'
+      const check = checkSubscriptionLimit(planType, count)
       setSubscriptionCheck(check)
     }
   }, [user, isLoading, router, invoices])
@@ -193,7 +193,14 @@ export default function CreateInvoicePage() {
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10">
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* No subscription limit alert needed - unlimited for all */}
+          {/* Subscription limit alert for Basic plan */}
+          {!subscriptionCheck.canCreateInvoice && (
+            <SubscriptionLimitAlert
+              currentCount={subscriptionCheck.currentCount}
+              limit={subscriptionCheck.limit}
+              message={subscriptionCheck.message}
+            />
+          )}
           
           {/* Basic Info */}
           <Card className="bg-slate-800/50 backdrop-blur-sm border-blue-500/20 p-6 shadow-lg">
