@@ -1,4 +1,4 @@
-import { LEMON_SQUEEZY_API_KEY, LEMON_SQUEEZY_WEBHOOK_SECRET, LEMON_SQUEEZY_STORE_ID, LEMON_SQUEEZY_PREMIUM_PRODUCT_ID } from './env'
+import { getLemonSqueezyApiKey, getLemonSqueezyWebhookSecret, getLemonSqueezyStoreId, getLemonSqueezyPremiumProductId } from './env'
 
 // Pricing plans in Lemon Squeezy
 export const PRICING_PLANS = {
@@ -18,7 +18,7 @@ export const PRICING_PLANS = {
     name: 'Premium',
     price: 99,
     description: 'Nieograniczone faktury',
-    lemonSqueezyProductId: process.env.LEMON_SQUEEZY_PREMIUM_PRODUCT_ID,
+    lemonSqueezyProductId: getLemonSqueezyPremiumProductId(),
     features: [
       'Nieograniczone faktury',
       'Wszystkie funkcje',
@@ -33,7 +33,8 @@ export async function createLemonSqueezyCheckoutSession(
   userId: string,
   plan: 'premium'
 ): Promise<{ checkoutUrl: string; sessionId: string }> {
-  if (!LEMON_SQUEEZY_API_KEY) {
+  const apiKey = getLemonSqueezyApiKey()
+  if (!apiKey) {
     throw new Error('LEMON_SQUEEZY_API_KEY not configured - set it in environment variables')
   }
 
@@ -42,7 +43,8 @@ export async function createLemonSqueezyCheckoutSession(
     throw new Error('LEMON_SQUEEZY_PREMIUM_PRODUCT_ID not configured - set it in environment variables')
   }
 
-  if (!LEMON_SQUEEZY_STORE_ID) {
+  const storeId = getLemonSqueezyStoreId()
+  if (!storeId) {
     throw new Error('LEMON_SQUEEZY_STORE_ID not configured - set it in environment variables')
   }
 
@@ -50,7 +52,7 @@ export async function createLemonSqueezyCheckoutSession(
     const response = await fetch('https://api.lemonsqueezy.com/v1/checkouts', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${LEMON_SQUEEZY_API_KEY}`,
+        'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
@@ -68,7 +70,7 @@ export async function createLemonSqueezyCheckoutSession(
             store: {
               data: {
                 type: 'stores',
-                id: LEMON_SQUEEZY_STORE_ID,
+                id: storeId,
               },
             },
             variant: {
@@ -103,7 +105,9 @@ export async function verifyLemonSqueezyWebhookSignature(
   body: Buffer,
   signature: string
 ): Promise<boolean> {
-  if (!LEMON_SQUEEZY_WEBHOOK_SECRET) {
+  const webhookSecret = getLemonSqueezyWebhookSecret()
+  
+  if (!webhookSecret) {
     console.error('LEMON_SQUEEZY_WEBHOOK_SECRET not configured')
     return false
   }
@@ -111,7 +115,7 @@ export async function verifyLemonSqueezyWebhookSignature(
   try {
     const crypto = require('crypto')
     const hmac = crypto
-      .createHmac('sha256', LEMON_SQUEEZY_WEBHOOK_SECRET)
+      .createHmac('sha256', webhookSecret)
       .update(body)
       .digest('hex')
 
