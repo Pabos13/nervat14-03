@@ -196,9 +196,11 @@ export default function CreateInvoicePage() {
           {/* Subscription limit alert for Basic plan */}
           {!subscriptionCheck.canCreateInvoice && (
             <SubscriptionLimitAlert
+              canCreateInvoice={subscriptionCheck.canCreateInvoice}
               currentCount={subscriptionCheck.currentCount}
               limit={subscriptionCheck.limit}
               message={subscriptionCheck.message}
+              planId={user?.subscription?.plan || 'basic'}
             />
           )}
           
