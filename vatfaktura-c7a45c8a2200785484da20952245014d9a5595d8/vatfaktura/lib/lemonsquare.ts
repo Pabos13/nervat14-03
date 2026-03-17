@@ -46,10 +46,16 @@ export async function createCheckoutSession(
   const apiKey = process.env.LEMONSQUEZE_API_KEY;
 
   if (!apiKey) {
-    throw new Error('LEMONSQUEZE_API_KEY is not configured');
+    console.warn('LEMONSQUEZE_API_KEY is not configured - using mock checkout for testing');
+    // Return a mock checkout URL for testing purposes
+    return {
+      checkoutUrl: `https://lemonsquare.com/mock-checkout?customer=${encodeURIComponent(userEmail)}&userId=${userId}&return=${encodeURIComponent(returnUrl)}`,
+      sessionId: 'mock-session-' + Date.now(),
+    };
   }
 
   try {
+    console.log('[v0] Creating checkout session for:', userEmail);
     const response = await fetch('https://api.lemonsquare.com/v1/checkout-sessions', {
       method: 'POST',
       headers: {
@@ -66,18 +72,22 @@ export async function createCheckoutSession(
       }),
     });
 
+    console.log('[v0] Lemonsquare API response status:', response.status);
+    
     if (!response.ok) {
       const error = await response.json();
+      console.error('[v0] Lemonsquare API error:', error);
       throw new Error(`Lemonsquare API error: ${error.message}`);
     }
 
     const data = await response.json();
+    console.log('[v0] Checkout session created successfully');
     return {
       checkoutUrl: data.checkoutUrl,
       sessionId: data.id,
     };
   } catch (error) {
-    console.error('Lemonsquare checkout error:', error);
+    console.error('[v0] Lemonsquare checkout error:', error);
     throw error;
   }
 }

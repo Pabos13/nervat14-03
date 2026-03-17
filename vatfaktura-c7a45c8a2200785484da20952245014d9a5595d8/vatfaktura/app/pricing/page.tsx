@@ -129,6 +129,7 @@ export default function PricingPage() {
 
     setIsProcessing(true)
     try {
+      console.log('[v0] Starting upgrade process for user:', user.id)
       const response = await fetch('/api/lemonsquare/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -139,13 +140,26 @@ export default function PricingPage() {
         }),
       })
 
-      if (!response.ok) throw new Error('Checkout failed')
+      console.log('[v0] Checkout response status:', response.status)
+      
+      if (!response.ok) {
+        const errorData = await response.json()
+        console.error('[v0] Checkout error:', errorData)
+        throw new Error(errorData.error || 'Checkout failed')
+      }
 
       const data = await response.json()
+      console.log('[v0] Checkout data received:', data)
+      
+      if (!data.checkoutUrl) {
+        throw new Error('No checkout URL returned from server')
+      }
+      
+      console.log('[v0] Redirecting to:', data.checkoutUrl)
       window.location.href = data.checkoutUrl
     } catch (error) {
-      console.error('Upgrade error:', error)
-      alert('Nie udało się przejść do płatności. Spróbuj ponownie.')
+      console.error('[v0] Upgrade error:', error)
+      alert('Nie udało się przejść do płatności. Spróbuj ponownie. Error: ' + (error instanceof Error ? error.message : 'Unknown error'))
     } finally {
       setIsProcessing(false)
       setIsUpgradeModalOpen(false)
@@ -215,13 +229,19 @@ export default function PricingPage() {
                   <Button disabled className="w-full min-h-[44px] text-sm font-semibold bg-slate-700 text-slate-300">
                     Jesteś na Premium
                   </Button>
-                ) : plan.id === 'premium' ? (
+                ) : plan.id === 'premium' && user ? (
                   <button
                     onClick={() => setIsUpgradeModalOpen(true)}
                     className="w-full min-h-[44px] text-sm font-semibold bg-gradient-to-r from-yellow-600 to-yellow-500 hover:from-yellow-700 hover:to-yellow-600 text-white rounded-lg transition-all shadow-lg shadow-yellow-500/30 hover:shadow-yellow-500/50"
                   >
-                    {user ? 'Przejdź na Premium' : 'Załóż konto'}
+                    Przejdź na Premium
                   </button>
+                ) : plan.id === 'premium' && !user ? (
+                  <Link href="/register" className="block">
+                    <Button className="w-full min-h-[44px] text-sm font-semibold bg-gradient-to-r from-yellow-600 to-yellow-500 hover:from-yellow-700 hover:to-yellow-600 text-white">
+                      Załóż konto
+                    </Button>
+                  </Link>
                 ) : (
                   <Link href={user ? '/dashboard' : '/register'} className="block">
                     <Button className="w-full min-h-[44px] text-sm font-semibold bg-blue-600 hover:bg-blue-700 text-white">
