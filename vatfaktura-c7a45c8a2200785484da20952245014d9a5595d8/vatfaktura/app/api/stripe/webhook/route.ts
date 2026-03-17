@@ -14,12 +14,18 @@ async function handleCustomerSubscriptionUpdated(event: Stripe.Event) {
 
   const userId = subscription.metadata.userId
   const planId = subscription.metadata.planId || 'pro'
+  
+  // Map old Stripe plan names to new Lemon Squeezy plan names
+  let newPlan: 'basic' | 'premium' = 'basic'
+  if (planId === 'pro' || planId === 'enterprise') {
+    newPlan = 'premium'
+  }
 
   // Update user subscription
   updateUserSubscription(userId, {
-    plan: planId as 'free' | 'pro' | 'enterprise',
-    stripeCustomerId: subscription.customer as string,
-    stripeSubscriptionId: subscription.id,
+    plan: newPlan,
+    lemonSqueezyCustomerId: subscription.customer as string,
+    lemonSqueezySubscriptionId: subscription.id,
     currentPeriodStart: new Date(subscription.current_period_start * 1000),
     currentPeriodEnd: new Date(subscription.current_period_end * 1000),
   })
@@ -45,11 +51,11 @@ async function handleCustomerSubscriptionDeleted(event: Stripe.Event) {
 
   const userId = subscription.metadata.userId
 
-  // Downgrade user to free plan
+  // Downgrade user to basic plan
   updateUserSubscription(userId, {
-    plan: 'free',
-    stripeCustomerId: undefined,
-    stripeSubscriptionId: undefined,
+    plan: 'basic',
+    lemonSqueezyCustomerId: undefined,
+    lemonSqueezySubscriptionId: undefined,
   })
 }
 
