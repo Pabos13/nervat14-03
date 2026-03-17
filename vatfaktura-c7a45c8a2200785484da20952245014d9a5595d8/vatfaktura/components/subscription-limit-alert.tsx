@@ -52,7 +52,7 @@ export function SubscriptionLimitAlert({
             `Jesteś ${isAtLimit ? 'na' : 'blisko'} limitu ${limit} faktur na ten miesiąc.`}
         </p>
       </div>
-      {planId !== 'enterprise' && (
+      {planId !== 'premium' && (
         <Link href="/pricing" className="flex-shrink-0">
           <Button
             size="sm"
