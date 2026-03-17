@@ -2,19 +2,19 @@
 // Using getters to ensure variables are loaded when functions are called, not at import time
 
 export function getLemonSqueezyApiKey() {
-  return process.env.LEMON_SQUEEZY_API_KEY || ''
+  return process.env.LEMON_SQUEEZY_API_KEY || process.env.NEXT_PUBLIC_LEMON_SQUEEZY_API_KEY || ''
 }
 
 export function getLemonSqueezyWebhookSecret() {
-  return process.env.LEMON_SQUEEZY_WEBHOOK_SECRET || ''
+  return process.env.LEMON_SQUEEZY_WEBHOOK_SECRET || process.env.NEXT_PUBLIC_LEMON_SQUEEZY_WEBHOOK_SECRET || ''
 }
 
 export function getLemonSqueezyStoreId() {
-  return process.env.LEMON_SQUEEZY_STORE_ID || ''
+  return process.env.LEMON_SQUEEZY_STORE_ID || process.env.NEXT_PUBLIC_LEMON_SQUEEZY_STORE_ID || ''
 }
 
 export function getLemonSqueezyPremiumProductId() {
-  return process.env.LEMON_SQUEEZY_PREMIUM_PRODUCT_ID || ''
+  return process.env.LEMON_SQUEEZY_PREMIUM_PRODUCT_ID || process.env.NEXT_PUBLIC_LEMON_SQUEEZY_PREMIUM_PRODUCT_ID || ''
 }
 
 export function validateLemonSqueezyEnv() {
