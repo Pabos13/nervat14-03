@@ -80,11 +80,12 @@ export default function RegisterPage() {
           accountType: data.accountType,
           firstName: data.firstName,
           lastName: data.lastName,
+          subscription: data.subscription,
         }))
         localStorage.setItem('vatfaktura_auth_token', data.token)
       }
 
-      await new Promise(resolve => setTimeout(resolve, 100))
+      await new Promise(resolve => setTimeout(resolve, 500))
       
       // Jeśli użytkownik wybrał Premium z pricing page, przejdź do checkout
       if (planFromUrl === 'premium') {
@@ -92,7 +93,11 @@ export default function RegisterPage() {
           const checkoutResponse = await fetch('/api/lemon-squeezy/checkout', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ plan: 'premium' }),
+            body: JSON.stringify({ 
+              plan: 'premium',
+              userId: data.userId,
+              email: data.email
+            }),
           })
           
           if (checkoutResponse.ok) {

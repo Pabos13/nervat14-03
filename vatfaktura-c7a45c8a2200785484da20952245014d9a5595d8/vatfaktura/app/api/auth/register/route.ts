@@ -56,6 +56,7 @@ export async function POST(request: NextRequest) {
         accountType: user.accountType,
         firstName: user.firstName,
         lastName: user.lastName,
+        subscription: user.subscription,
       },
       { status: 201 }
     )
