@@ -93,6 +93,7 @@ export function registerUser(
     accountType: user.accountType,
     firstName: user.firstName,
     lastName: user.lastName,
+    subscription: user.subscription,
   }
 }
 
