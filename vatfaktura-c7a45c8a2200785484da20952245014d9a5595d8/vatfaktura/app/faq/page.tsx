@@ -105,6 +105,7 @@ const invoiceFaqs = [
     question: 'Co to jest plan Premium?',
     answer: 'Plan Premium to 99 PLN/miesiąc i daje Ci nieograniczoną liczbę faktur, dostęp do wszystkich funkcji oraz priorytetowe wsparcie. Możesz anulować w każdej chwili.'
   },
+  {
     question: 'Czy mogę eksportować faktury do PDF?',
     answer: 'Tak, każdą fakturę możesz wyeksportować do pliku PDF i wydrukować. Faktury można również wysyłać jako e-faktury poprzez system KSEF.'
   },
