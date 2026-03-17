@@ -34,16 +34,23 @@ export async function createLemonSqueezyCheckoutSession(
   plan: 'premium'
 ): Promise<{ checkoutUrl: string; sessionId: string }> {
   const apiKey = getLemonSqueezyApiKey()
+  const productId = getLemonSqueezyPremiumProductId()
+  const storeId = getLemonSqueezyStoreId()
+  
+  console.log('[v0] Getter function values:', {
+    apiKey: apiKey ? apiKey.substring(0, 30) + '...' : 'EMPTY',
+    productId: productId,
+    storeId: storeId,
+  })
+  
   if (!apiKey) {
     throw new Error('LEMON_SQUEEZY_API_KEY not configured - set it in environment variables')
   }
 
-  const productId = getLemonSqueezyPremiumProductId()
   if (!productId) {
     throw new Error('LEMON_SQUEEZY_PREMIUM_PRODUCT_ID not configured - set it in environment variables')
   }
 
-  const storeId = getLemonSqueezyStoreId()
   if (!storeId) {
     throw new Error('LEMON_SQUEEZY_STORE_ID not configured - set it in environment variables')
   }
