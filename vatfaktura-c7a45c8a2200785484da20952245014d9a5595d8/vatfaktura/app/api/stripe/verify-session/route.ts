@@ -45,8 +45,8 @@ export async function GET(request: NextRequest) {
       
       updateUserSubscription(session.metadata.userId, {
         plan: newPlan,
-        stripeCustomerId: session.customer as string,
-        stripeSubscriptionId: subscription?.id,
+        lemonSqueezyCustomerId: session.customer as string,
+        lemonSqueezySubscriptionId: subscription?.id,
         currentPeriodStart: subscription?.current_period_start ? new Date(subscription.current_period_start * 1000) : undefined,
         currentPeriodEnd: subscription?.current_period_end ? new Date(subscription.current_period_end * 1000) : undefined,
       })
