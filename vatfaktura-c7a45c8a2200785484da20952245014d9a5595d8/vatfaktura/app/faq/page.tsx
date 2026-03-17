@@ -110,10 +110,6 @@ const invoiceFaqs = [
     answer: 'Tak, każdą fakturę możesz wyeksportować do pliku PDF i wydrukować. Faktury można również wysyłać jako e-faktury poprzez system KSEF.'
   },
   {
-    question: 'Czy mogę eksportować faktury do PDF?',
-    answer: 'Tak, każdą fakturę możesz wyeksportować do pliku PDF i wydrukować. Faktury można również wysyłać jako e-faktury poprzez system KSEF.'
-  },
-  {
     question: 'Co to jest KSEF i czy VAT Faktura go wspiera?',
     answer: 'KSEF (Krajowy System e-Faktur) to obowiązkowy system do przesyłania faktur. VAT Faktura ma pełną integrację z KSEF, dzięki czemu możesz wysyłać faktury bezpośrednio z aplikacji.'
   },
