@@ -56,6 +56,11 @@ export async function createLemonSqueezyCheckoutSession(
   }
 
   try {
+    console.log('[v0] Making request to Lemon Squeezy API...')
+    console.log('[v0] Store ID:', storeId)
+    console.log('[v0] Product ID:', productId)
+    console.log('[v0] API Key begins with:', apiKey.substring(0, 20))
+    
     const response = await fetch('https://api.lemonsqueezy.com/v1/checkouts', {
       method: 'POST',
       headers: {
@@ -92,9 +97,11 @@ export async function createLemonSqueezyCheckoutSession(
     })
 
     const result = await response.json()
+    
+    console.log('[v0] Lemon Squeezy response status:', response.status)
 
     if (!response.ok) {
-      console.error('Lemon Squeezy API error:', result)
+      console.error('[v0] Lemon Squeezy API error:', result)
       throw new Error(`Failed to create checkout: ${result.errors?.[0]?.detail || 'Unknown error'}`)
     }
 
