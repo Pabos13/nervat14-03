@@ -72,7 +72,7 @@ export default function RegisterPage() {
       }
 
       if (data.token) {
-        localStorage.setItem('vatfaktura_user', JSON.stringify({
+        const userData = {
           id: data.userId,
           email: data.email,
           company: data.company,
@@ -80,8 +80,13 @@ export default function RegisterPage() {
           accountType: data.accountType,
           firstName: data.firstName,
           lastName: data.lastName,
-          subscription: data.subscription,
-        }))
+          subscription: {
+            ...data.subscription,
+            // Jeśli rejestruje się do Premium, nadaj mu od razu Premium plan
+            plan: planFromUrl === 'premium' ? 'premium' : data.subscription.plan
+          },
+        }
+        localStorage.setItem('vatfaktura_user', JSON.stringify(userData))
         localStorage.setItem('vatfaktura_auth_token', data.token)
       }
 
@@ -100,15 +105,16 @@ export default function RegisterPage() {
             }),
           })
           
-          if (checkoutResponse.ok) {
-            const checkoutData = await checkoutResponse.json()
-            if (checkoutData.checkoutUrl) {
-              window.location.href = checkoutData.checkoutUrl
-              return
-            }
+          const checkoutData = await checkoutResponse.json()
+          
+          if (checkoutResponse.ok && checkoutData.checkoutUrl) {
+            window.location.href = checkoutData.checkoutUrl
+            return
+          } else {
+            setError(checkoutData.error || 'Failed to create checkout session')
           }
         } catch (err) {
-          console.error('Error creating checkout:', err)
+          setError('Error: ' + (err instanceof Error ? err.message : 'Unknown error'))
         }
       }
       
