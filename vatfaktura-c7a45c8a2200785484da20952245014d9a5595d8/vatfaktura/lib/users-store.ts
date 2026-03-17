@@ -1,14 +1,17 @@
 import crypto from 'crypto'
 
 export type AccountType = 'private' | 'business'
+export type PlanType = 'basic' | 'premium'
 
 export interface UserSubscription {
-  plan: 'free' | 'pro' | 'enterprise'
-  stripeCustomerId?: string
-  stripeSubscriptionId?: string
+  plan: PlanType
+  lemonSqueezyCustomerId?: string
+  lemonSqueezySubscriptionId?: string
+  subscriptionStatus?: 'active' | 'paused' | 'cancelled' | 'expired'
   currentPeriodStart?: Date
   currentPeriodEnd?: Date
-  invoicesUsedThisMonth: number
+  invoicesCreatedAfterMigration: number // Liczba faktur utworzonych od dzisiaj (2024-01-XX)
+  migrationDate: Date // Data gdy zmieniliśmy model z free na freemium
 }
 
 export interface User {
@@ -43,6 +46,7 @@ export function registerUser(
     firstName?: string
     lastName?: string
     pesel?: string
+    plan?: PlanType
   }
 ) {
   if (users.has(email)) {
@@ -73,8 +77,9 @@ export function registerUser(
     pesel: options.pesel || '',
     createdAt: new Date(),
     subscription: {
-      plan: 'free',
-      invoicesUsedThisMonth: 0,
+      plan: options.plan || 'basic',
+      invoicesCreatedAfterMigration: 0,
+      migrationDate: new Date(),
     } as UserSubscription,
   }
 
@@ -88,6 +93,7 @@ export function registerUser(
     accountType: user.accountType,
     firstName: user.firstName,
     lastName: user.lastName,
+    subscription: user.subscription,
   }
 }
 

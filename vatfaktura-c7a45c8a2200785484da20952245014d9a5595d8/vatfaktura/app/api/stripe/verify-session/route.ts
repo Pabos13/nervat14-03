@@ -37,10 +37,16 @@ export async function GET(request: NextRequest) {
 
     // Update user subscription in our database
     if (session.metadata?.userId) {
+      // Map old Stripe plan names to new Lemon Squeezy plan names
+      let newPlan: 'basic' | 'premium' = 'basic'
+      if (planId === 'pro' || planId === 'enterprise') {
+        newPlan = 'premium'
+      }
+      
       updateUserSubscription(session.metadata.userId, {
-        plan: planId as 'free' | 'pro' | 'enterprise',
-        stripeCustomerId: session.customer as string,
-        stripeSubscriptionId: subscription?.id,
+        plan: newPlan,
+        lemonSqueezyCustomerId: session.customer as string,
+        lemonSqueezySubscriptionId: subscription?.id,
         currentPeriodStart: subscription?.current_period_start ? new Date(subscription.current_period_start * 1000) : undefined,
         currentPeriodEnd: subscription?.current_period_end ? new Date(subscription.current_period_end * 1000) : undefined,
       })

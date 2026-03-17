@@ -94,8 +94,16 @@ const pitFaqs = [
 
 const invoiceFaqs = [
   {
-    question: 'Czy VAT Faktura jest naprawdę 100% bezpłatna?',
-    answer: 'Tak, VAT Faktura jest w pełni bezpłatna. Nie trzeba podawać karty kredytowej, nie ma ukrytych opłat, a wszystkie funkcje są dostępne dla wszystkich użytkowników.'
+    question: 'Czy VAT Faktura jest naprawdę bezpłatna?',
+    answer: 'VAT Faktura ma model freemium - plan Podstawowy jest w pełni bezpłatny (5 faktur na start), a plan Premium to 99 PLN/miesiąc. Nie ma ukrytych opłat ani karty kredytowej wymagane do zalogowania.'
+  },
+  {
+    question: 'Co to jest plan Podstawowy?',
+    answer: 'Plan Podstawowy to darmowy plan z limitem 5 faktur na całe konto (nie miesięczne). Po wyczerpaniu limitu możesz: (1) upgrade do Premium za 99 PLN/miesiąc, (2) czekać aż inni użytkownicy będą chcieli kupić faktury od Ciebie albo (3) pozostać na planie Podstawowym bez dodatkowych faktur.'
+  },
+  {
+    question: 'Co to jest plan Premium?',
+    answer: 'Plan Premium to 99 PLN/miesiąc i daje Ci nieograniczoną liczbę faktur, dostęp do wszystkich funkcji oraz priorytetowe wsparcie. Możesz anulować w każdej chwili.'
   },
   {
     question: 'Czy mogę eksportować faktury do PDF?',

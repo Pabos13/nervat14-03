@@ -10,6 +10,8 @@ import { Plus, LogOut, FileText, CreditCard, Search, Filter, X, Calculator, Shie
 import Link from 'next/link'
 import InvoicesList from '@/components/invoices-list'
 import DashboardStats from '@/components/dashboard-stats'
+import { SubscriptionStatus } from '@/components/subscription-status'
+import { getInvoiceCountAfterMigration } from '@/lib/subscription-limits'
 import { SupportBanner } from '@/components/support-banner'
 
 export default function DashboardPage() {
@@ -100,6 +102,14 @@ export default function DashboardPage() {
         {/* Stats */}
         <DashboardStats invoices={userInvoices} />
 
+        {/* Subscription Status */}
+        <SubscriptionStatus
+          plan={user.subscription?.plan || 'basic'}
+          invoicesUsed={getInvoiceCountAfterMigration(userInvoices, user.subscription?.migrationDate || new Date())}
+          invoicesLimit={5}
+          subscriptionStatus={user.subscription?.subscriptionStatus}
+        />
+
         {/* KSeF Banner - only for business accounts */}
         {user.accountType === 'business' && (
           <div className="mt-2 p-4 rounded-xl bg-gradient-to-r from-green-900/40 to-cyan-900/40 border border-green-500/30 flex flex-col sm:flex-row items-start sm:items-center gap-3 justify-between">
@@ -177,11 +187,11 @@ export default function DashboardPage() {
               <span className="sm:hidden">ZUS</span>
             </Button>
           </Link>
-          <Link href="/dashboard/billing" className="group">
+          <Link href="/pricing" className="group">
             <Button variant="outline" className="w-full min-h-[44px] text-xs sm:text-sm font-medium border-blue-500/30 hover:bg-blue-500/10 text-blue-300 group-hover:border-blue-500/50 transition-all">
               <CreditCard className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
-              <span className="hidden sm:inline">Plan</span>
-              <span className="sm:hidden">Pl</span>
+              <span className="hidden sm:inline">{user.subscription?.plan === 'premium' ? 'Premium' : 'Upgrade'}</span>
+              <span className="sm:hidden">{user.subscription?.plan === 'premium' ? 'Prem' : 'Upg'}</span>
             </Button>
           </Link>
           <Link href="/dashboard/settings" className="group">
