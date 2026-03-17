@@ -2,11 +2,25 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react'
 
+interface Subscription {
+  plan: 'starter' | 'premium'
+  invoicesUsedThisMonth: number
+  invoicesCreatedTotal: number
+  lemonsquareCustomerId?: string
+  lemonsquareSubscriptionId?: string
+  lemonsquareSubscriptionStatus?: 'active' | 'paused' | 'cancelled' | 'expired' | 'past_due'
+  lemonsquareCurrentPeriodEnd?: number
+}
+
 interface User {
   id: string
   email: string
   company: string
   nip: string
+  plan?: 'starter' | 'premium'
+  subscription?: Subscription
+  firstName?: string
+  lastName?: string
 }
 
 interface AuthContextType {
@@ -56,6 +70,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       email,
       company,
       nip,
+      plan: 'starter',
+      subscription: {
+        plan: 'starter',
+        invoicesUsedThisMonth: 0,
+        invoicesCreatedTotal: 0,
+      },
     }
 
     users.push({ ...newUser, password })

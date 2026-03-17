@@ -77,6 +77,12 @@ export default function RegisterPage() {
           accountType: data.accountType,
           firstName: data.firstName,
           lastName: data.lastName,
+          plan: data.plan || 'starter',
+          subscription: data.subscription || {
+            plan: 'starter',
+            invoicesUsedThisMonth: 0,
+            invoicesCreatedTotal: 0,
+          },
         }))
         localStorage.setItem('vatfaktura_auth_token', data.token)
       }
