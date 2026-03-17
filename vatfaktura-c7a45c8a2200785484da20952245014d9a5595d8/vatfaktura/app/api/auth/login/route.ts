@@ -26,6 +26,12 @@ export async function POST(request: NextRequest) {
       accountType: user.accountType || 'business',
       firstName: user.firstName,
       lastName: user.lastName,
+      plan: user.subscription?.plan || 'starter',
+      subscription: user.subscription || {
+        plan: 'starter',
+        invoicesUsedThisMonth: 0,
+        invoicesCreatedTotal: 0,
+      },
     })
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Błąd serwera'

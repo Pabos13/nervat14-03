@@ -49,16 +49,24 @@ export interface Invoice {
   ksef?: KSeFStatus
 }
 
+export interface InvoiceLimitError {
+  exceeded: boolean
+  currentCount: number
+  limit: number
+  message: string
+}
+
 interface InvoiceContextType {
   invoices: Invoice[]
   templates: any[]
-  addInvoice: (invoice: Invoice) => void
+  addInvoice: (invoice: Invoice) => void | InvoiceLimitError
   updateInvoice: (id: string, invoice: Partial<Invoice>) => void
   updateInvoiceStatus: (id: string, newStatus: Invoice['status'], userName: string) => void
   deleteInvoice: (id: string) => void
   duplicateInvoice: (id: string) => Invoice | null
   getInvoicesByUser: (userId: string) => Invoice[]
   saveTemplate: (template: any) => void
+  checkInvoiceLimit: (userId: string, userPlan: string) => InvoiceLimitError | null
 }
 
 const InvoiceContext = createContext<InvoiceContextType | undefined>(undefined)
@@ -143,8 +151,30 @@ export function InvoiceProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem('vatfaktura_templates', JSON.stringify(updated))
   }
 
+  const checkInvoiceLimit = (userId: string, userPlan: string): InvoiceLimitError | null => {
+    const userInvoices = invoices.filter(inv => inv.userId === userId)
+    const currentCount = userInvoices.length
+
+    // Starter plan: max 5 invoices total
+    if (userPlan === 'starter' && currentCount >= 5) {
+      return {
+        exceeded: true,
+        currentCount,
+        limit: 5,
+        message: 'Osiągnąłeś limit 5 faktur dla planu Starter. Przejdź na plan Premium, aby tworzyć nieograniczone faktury.',
+      }
+    }
+
+    // Premium plan: unlimited
+    if (userPlan === 'premium') {
+      return null
+    }
+
+    return null
+  }
+
   return (
-    <InvoiceContext.Provider value={{ invoices, templates, addInvoice, updateInvoice, updateInvoiceStatus, deleteInvoice, duplicateInvoice, getInvoicesByUser, saveTemplate }}>
+    <InvoiceContext.Provider value={{ invoices, templates, addInvoice, updateInvoice, updateInvoiceStatus, deleteInvoice, duplicateInvoice, getInvoicesByUser, saveTemplate, checkInvoiceLimit }}>
       {children}
     </InvoiceContext.Provider>
   )

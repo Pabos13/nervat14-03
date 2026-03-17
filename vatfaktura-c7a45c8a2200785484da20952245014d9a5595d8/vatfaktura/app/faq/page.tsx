@@ -94,8 +94,32 @@ const pitFaqs = [
 
 const invoiceFaqs = [
   {
+    question: 'Jakie są różnice między planem Starter a Premium?',
+    answer: 'Plan Starter (0 zł) pozwala na vytorzenie do 5 faktur i zawiera podstawowe funkcje. Plan Premium (99 zł/msc) oferuje nieograniczone faktury i dostęp do zaawansowanych funkcji takich jak integracja z KSeF. Nowi użytkownicy automatycznie otrzymują plan Starter.'
+  },
+  {
+    question: 'Co się stanie, gdy osiągnę limit 5 faktur na planie Starter?',
+    answer: 'Gdy vytorzysz 5-tą fakturę, systerm zablokuje możliwość tworzenia 6-tej faktury. Będziesz mieć możliwość przejścia na plan Premium, aby kontynuować. Limit dotyczy łącznej liczby faktur, a nie limitów miesięcznych.'
+  },
+  {
+    question: 'Czy mogę zmienić plan z Starter na Premium?',
+    answer: 'Tak! Możesz przejść na plan Premium w dowolnym momencie. Wystarczy kliknąć "Przejdź na Premium" na stronie Pricing lub w Dashboardzie. Otrzymasz 14 dni bezpłatnej próby, a następnie subskrypcja będzie kosztować 99 zł/msc.'
+  },
+  {
+    question: 'Co to jest 14 dni darmowej próby premium?',
+    answer: 'Po przejściu na plan Premium otrzymujesz 14 dni pełnego dostępu bez żadnych opłat. Po upływie tego okresu, Twoja karta zostanie obciążona kwotą 99 zł/msc. Możesz anulować subskrypcję w każdej chwili.'
+  },
+  {
+    question: 'Czy mogę anulować subskrypcję Premium?',
+    answer: 'Tak, możesz anulować subskrypcję w każdej chwili bez żadnych kar. Gdy anulujesz, Twoje konto wróci do planu Starter (z limitem 5 faktur).'
+  },
+  {
+    question: 'Czy płatności za Premium są bezpieczne?',
+    answer: 'Tak! Wszystkie płatności premium są przetwarzane przez Lemonsquare, który gwarantuje bezpieczną obsługę danych karty kredytowej z szyfrowaniem SSL i zgodzie ze standardami PCI DSS.'
+  },
+  {
     question: 'Czy VAT Faktura jest naprawdę 100% bezpłatna?',
-    answer: 'Tak, VAT Faktura jest w pełni bezpłatna. Nie trzeba podawać karty kredytowej, nie ma ukrytych opłat, a wszystkie funkcje są dostępne dla wszystkich użytkowników.'
+    answer: 'Plan Starter jest całkowicie bezpłatny. Nie trzeba podawać karty kredytowej do korzystania z planu Starter. Plan Premium kosztuje 99 zł/msc, ale oferuje 14 dni bezpłatnej próby.'
   },
   {
     question: 'Czy mogę eksportować faktury do PDF?',

@@ -1,14 +1,21 @@
 import crypto from 'crypto'
 
 export type AccountType = 'private' | 'business'
+export type PlanType = 'starter' | 'premium'
 
 export interface UserSubscription {
-  plan: 'free' | 'pro' | 'enterprise'
+  plan: PlanType
   stripeCustomerId?: string
   stripeSubscriptionId?: string
   currentPeriodStart?: Date
   currentPeriodEnd?: Date
   invoicesUsedThisMonth: number
+  // Lemonsquare subscription fields
+  lemonsquareCustomerId?: string
+  lemonsquareSubscriptionId?: string
+  lemonsquareSubscriptionStatus?: 'active' | 'paused' | 'cancelled' | 'expired' | 'past_due'
+  lemonsquareCurrentPeriodEnd?: number
+  invoicesCreatedTotal: number // Total count of invoices created (never resets for Starter limit check)
 }
 
 export interface User {
@@ -61,7 +68,7 @@ export function registerUser(
       ? `${options.firstName || ''} ${options.lastName || ''}`.trim()
       : options.company || ''
 
-  const user = {
+    const user = {
     id: userId,
     email,
     password: hashedPassword,
@@ -73,8 +80,9 @@ export function registerUser(
     pesel: options.pesel || '',
     createdAt: new Date(),
     subscription: {
-      plan: 'free',
+      plan: 'starter',
       invoicesUsedThisMonth: 0,
+      invoicesCreatedTotal: 0,
     } as UserSubscription,
   }
 
@@ -131,4 +139,35 @@ export function updateUserSubscription(userId: string, subscription: Partial<Use
     }
   }
   return null
+}
+
+export function getUser(userId: string) {
+  for (const [_, user] of users.entries()) {
+    if (user.id === userId) {
+      return user
+    }
+  }
+  return null
+}
+
+export function updateUser(userId: string, updates: Partial<User>) {
+  for (const [email, user] of users.entries()) {
+    if (user.id === userId) {
+      const updatedUser = { ...user, ...updates }
+      users.set(email, updatedUser)
+      return updatedUser
+    }
+  }
+  return null
+}
+
+export function getUsersStore() {
+  return {
+    getUser,
+    updateUser,
+    getUsers,
+    registerUser,
+    loginUser,
+    updateUserSubscription,
+  }
 }

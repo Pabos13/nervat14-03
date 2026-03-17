@@ -4,12 +4,18 @@
  */
 
 export interface UserSubscription {
-  plan: 'free' | 'pro' | 'enterprise'
+  plan: 'starter' | 'premium'
   stripeCustomerId?: string
   stripeSubscriptionId?: string
   currentPeriodStart?: Date
   currentPeriodEnd?: Date
   invoicesUsedThisMonth: number
+  // Lemonsquare subscription fields
+  lemonsquareCustomerId?: string
+  lemonsquareSubscriptionId?: string
+  lemonsquareSubscriptionStatus?: 'active' | 'paused' | 'cancelled' | 'expired' | 'past_due'
+  lemonsquareCurrentPeriodEnd?: number
+  invoicesCreatedTotal: number
 }
 
 export type AccountType = 'private' | 'business'
@@ -26,6 +32,7 @@ export interface User {
   address?: string
   city?: string
   postalCode?: string
+  plan?: 'starter' | 'premium'
   subscription?: UserSubscription
 }
 

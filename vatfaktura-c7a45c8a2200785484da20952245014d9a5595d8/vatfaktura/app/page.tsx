@@ -7,7 +7,7 @@ import { useLanguage } from '@/hooks/use-language'
 import { t } from '@/lib/i18n/translations'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
-import { CheckCircle, Zap, Shield, TrendingUp, Clock, FileText, Users, Star, Award, LogIn, Edit3, Download, Building2, ArrowRight, Calculator } from 'lucide-react'
+import { CheckCircle, Zap, Shield, TrendingUp, Clock, FileText, Users, Star, Award, LogIn, Edit3, Download, Building2, ArrowRight, Calculator, Check, X } from 'lucide-react'
 import Link from 'next/link'
 import { MobileNav } from '@/components/mobile-nav'
 import { HeaderMenu } from '@/components/header-menu'
@@ -105,7 +105,7 @@ export default function Home() {
           <div className="text-center space-y-8 sm:space-y-10 md:space-y-12">
             {/* Free Badge */}
             <div className="inline-block px-4 sm:px-5 py-2 sm:py-3 bg-gradient-to-r from-green-500/30 to-cyan-500/30 border border-green-400/60 rounded-full backdrop-blur-sm hover:border-green-300/80 transition-all duration-300">
-              <span className="text-xs sm:text-sm font-bold tracking-wider text-green-300 uppercase">{t('home.badge', language)}</span>
+              <span className="text-xs sm:text-sm font-bold tracking-wider text-green-300 uppercase">Plan Starter - 0 zł zawsze</span>
             </div>
             
             <div className="space-y-4 sm:space-y-6 md:space-y-8">
@@ -407,6 +407,94 @@ export default function Home() {
                   ))}
                 </div>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Pricing Plans Section */}
+        <section className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-20 sm:py-28 md:py-32">
+          <div className="text-center mb-12 sm:mb-16 space-y-4">
+            <div className="inline-block px-4 sm:px-5 py-2 bg-gradient-to-r from-yellow-500/20 to-orange-500/20 border border-yellow-400/50 rounded-full">
+              <span className="text-xs sm:text-sm font-bold tracking-widest text-yellow-300 uppercase">Nowy — Plany Premium</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-yellow-400 via-orange-300 to-yellow-300 bg-clip-text text-transparent px-4">
+              Wybierz plan dla siebie
+            </h2>
+            <p className="text-blue-200/70 text-sm sm:text-base md:text-lg max-w-3xl mx-auto leading-relaxed px-4">
+              Zacznij za darmo z planem Starter i przejdź na Premium, gdy będziesz gotowy na nieograniczone faktury
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {/* Starter Plan */}
+            <div className="bg-gradient-to-b from-slate-800/50 to-slate-900/50 border border-slate-700 rounded-2xl p-8 hover:border-slate-600 transition-all">
+              <h3 className="text-2xl font-bold text-white mb-2">Starter</h3>
+              <p className="text-blue-300/70 text-sm mb-6">Idealne do testowania</p>
+              <div className="mb-8">
+                <span className="text-4xl font-bold text-white">0 zł</span>
+                <span className="text-slate-400 ml-2">zawsze</span>
+              </div>
+              <Link href="/register" className="block mb-8">
+                <Button className="w-full min-h-[44px] bg-blue-600 hover:bg-blue-700 text-white font-semibold">
+                  Załóż konto
+                </Button>
+              </Link>
+              <ul className="space-y-4">
+                <li className="flex items-center gap-3 text-blue-100 text-sm">
+                  <Check className="w-5 h-5 text-green-400 flex-shrink-0" />
+                  <span>5 faktur maksymalnie</span>
+                </li>
+                <li className="flex items-center gap-3 text-blue-100 text-sm">
+                  <Check className="w-5 h-5 text-green-400 flex-shrink-0" />
+                  <span>Podstawowe szablony</span>
+                </li>
+                <li className="flex items-center gap-3 text-blue-100 text-sm">
+                  <Check className="w-5 h-5 text-green-400 flex-shrink-0" />
+                  <span>Export do PDF</span>
+                </li>
+                <li className="flex items-center gap-3 text-slate-500 text-sm">
+                  <X className="w-5 h-5 text-slate-600 flex-shrink-0" />
+                  <span>KSeF integracja</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Premium Plan */}
+            <div className="bg-gradient-to-b from-yellow-900/30 to-orange-900/30 border-2 border-yellow-500/50 rounded-2xl p-8 relative hover:border-yellow-400/70 transition-all transform md:scale-105">
+              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                <div className="bg-gradient-to-r from-yellow-600 to-orange-500 text-white px-4 py-1 rounded-full text-xs font-bold">
+                  14 DNI ZA DARMO
+                </div>
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-2">Premium</h3>
+              <p className="text-yellow-200/70 text-sm mb-6">Dla profesjonalistów</p>
+              <div className="mb-8">
+                <span className="text-4xl font-bold text-white">99 zł</span>
+                <span className="text-yellow-200/70 ml-2">/msc</span>
+              </div>
+              <Link href="/pricing" className="block mb-8">
+                <Button className="w-full min-h-[44px] bg-gradient-to-r from-yellow-600 to-orange-500 hover:from-yellow-700 hover:to-orange-600 text-white font-semibold shadow-lg shadow-yellow-500/30">
+                  Dowiedz się więcej
+                </Button>
+              </Link>
+              <ul className="space-y-4">
+                <li className="flex items-center gap-3 text-white text-sm font-medium">
+                  <Check className="w-5 h-5 text-green-400 flex-shrink-0" />
+                  <span>Nieograniczone faktury</span>
+                </li>
+                <li className="flex items-center gap-3 text-white text-sm font-medium">
+                  <Check className="w-5 h-5 text-green-400 flex-shrink-0" />
+                  <span>Wszystkie szablony</span>
+                </li>
+                <li className="flex items-center gap-3 text-white text-sm font-medium">
+                  <Check className="w-5 h-5 text-green-400 flex-shrink-0" />
+                  <span>KSeF integracja</span>
+                </li>
+                <li className="flex items-center gap-3 text-white text-sm font-medium">
+                  <Check className="w-5 h-5 text-green-400 flex-shrink-0" />
+                  <span>Wsparcie priorytetowe</span>
+                </li>
+              </ul>
             </div>
           </div>
         </section>

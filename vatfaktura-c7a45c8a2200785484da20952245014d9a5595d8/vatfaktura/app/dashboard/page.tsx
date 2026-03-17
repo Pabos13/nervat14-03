@@ -6,7 +6,7 @@ import { useUser } from '@/hooks/useUser'
 import { useInvoices } from '../invoice-context'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Plus, LogOut, FileText, CreditCard, Search, Filter, X, Calculator, Shield, Briefcase, Building2 } from 'lucide-react'
+import { Plus, LogOut, FileText, CreditCard, Search, Filter, X, Calculator, Shield, Briefcase, Building2, Crown, AlertCircle } from 'lucide-react'
 import Link from 'next/link'
 import InvoicesList from '@/components/invoices-list'
 import DashboardStats from '@/components/dashboard-stats'
@@ -184,12 +184,48 @@ export default function DashboardPage() {
               <span className="sm:hidden">Pl</span>
             </Button>
           </Link>
-          <Link href="/dashboard/settings" className="group">
+            <Link href="/dashboard/settings" className="group">
             <Button variant="outline" className="w-full min-h-[44px] text-xs sm:text-sm font-medium border-blue-500/30 hover:bg-blue-500/10 text-blue-300 group-hover:border-blue-500/50 transition-all">
               <span className="hidden sm:inline">Ustawienia</span>
               <span className="sm:hidden">Ust</span>
             </Button>
           </Link>
+        </div>
+
+        {/* Plan Banner */}
+        <div className="bg-gradient-to-r from-slate-800/50 to-slate-700/50 border border-slate-600/30 rounded-xl p-4 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className={`w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 ${
+              user.plan === 'premium' 
+                ? 'bg-gradient-to-br from-yellow-600 to-yellow-500' 
+                : 'bg-gradient-to-br from-blue-600 to-cyan-500'
+            }`}>
+              {user.plan === 'premium' ? <Crown className="w-5 h-5 text-white" /> : <FileText className="w-5 h-5 text-white" />}
+            </div>
+            <div>
+              <p className="text-white font-semibold text-sm">
+                Plan {user.plan === 'premium' ? 'Premium' : 'Starter'}
+              </p>
+              <p className="text-slate-400 text-xs">
+                {user.plan === 'premium' 
+                  ? 'Nieograniczone faktury • 99 zł/msc' 
+                  : `Faktury utworzone: ${user.subscription?.invoicesCreatedTotal || 0}/5`}
+              </p>
+            </div>
+          </div>
+          {user.plan === 'starter' && (user.subscription?.invoicesCreatedTotal || 0) >= 4 && (
+            <Link href="/pricing" className="flex-shrink-0">
+              <Button className="min-h-[40px] bg-gradient-to-r from-yellow-600 to-yellow-500 hover:from-yellow-700 hover:to-yellow-600 text-xs sm:text-sm text-white shadow-lg shadow-yellow-500/30">
+                Przejdź na Premium
+              </Button>
+            </Link>
+          )}
+          {user.plan === 'starter' && (user.subscription?.invoicesCreatedTotal || 0) < 4 && (
+            <div className="flex-shrink-0 text-right">
+              <p className="text-yellow-300 font-semibold text-sm">{5 - (user.subscription?.invoicesCreatedTotal || 0)} zostało</p>
+              <p className="text-slate-400 text-xs">do limitu</p>
+            </div>
+          )}
         </div>
 
         {/* Invoices List */}

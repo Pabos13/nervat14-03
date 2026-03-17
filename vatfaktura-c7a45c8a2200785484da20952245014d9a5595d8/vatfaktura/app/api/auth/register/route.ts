@@ -55,6 +55,12 @@ export async function POST(request: NextRequest) {
         accountType: user.accountType,
         firstName: user.firstName,
         lastName: user.lastName,
+        plan: 'starter',
+        subscription: {
+          plan: 'starter',
+          invoicesUsedThisMonth: 0,
+          invoicesCreatedTotal: 0,
+        },
       },
       { status: 201 }
     )

@@ -8,8 +8,8 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Card } from '@/components/ui/card'
 import { SubscriptionLimitAlert } from '@/components/subscription-limit-alert'
-import { checkSubscriptionLimit, getInvoiceCountThisMonth } from '@/lib/subscription-limits'
-import { Plus, Trash2, ChevronLeft, Eye, Download, Printer, User, Building2, Info } from 'lucide-react'
+import { checkSubscriptionLimit, getInvoiceCountThisMonth, getTotalInvoiceCount } from '@/lib/subscription-limits'
+import { Plus, Trash2, ChevronLeft, Eye, Download, Printer, User, Building2, Info, AlertCircle } from 'lucide-react'
 import Link from 'next/link'
 
 export default function CreateInvoicePage() {
@@ -51,8 +51,11 @@ export default function CreateInvoicePage() {
     
     if (user) {
       const userInvoices = invoices.filter(inv => inv.userId === user.id)
-      const count = getInvoiceCountThisMonth(userInvoices)
-      const planId = user.subscription?.plan || 'free'
+      // For Starter plan, count all invoices; for others, count monthly
+      const planId = user.subscription?.plan || 'starter'
+      const count = (planId === 'starter' || planId === 'free') 
+        ? getTotalInvoiceCount(userInvoices)
+        : getInvoiceCountThisMonth(userInvoices)
       const check = checkSubscriptionLimit(planId, count)
       setSubscriptionCheck(check)
     }
@@ -192,8 +195,36 @@ export default function CreateInvoicePage() {
       </header>
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10">
+        {!subscriptionCheck.canCreateInvoice && (
+          <div className="bg-gradient-to-r from-orange-900/40 to-red-900/40 border border-orange-500/30 rounded-lg p-4 sm:p-6 flex gap-4 mb-6">
+            <AlertCircle className="w-5 h-5 sm:w-6 sm:h-6 text-orange-300 flex-shrink-0 mt-0.5" />
+            <div>
+              <p className="text-white font-semibold mb-2">Limit faktur osiągnięty</p>
+              <p className="text-orange-200 text-sm mb-4">
+                Osiągnąłeś limit 5 faktur dla planu Starter. Aby tworzyć więcej faktur, przejdź na plan Premium.
+              </p>
+              <Link href="/pricing">
+                <Button className="bg-gradient-to-r from-yellow-600 to-orange-500 hover:from-yellow-700 hover:to-orange-600 text-white text-sm">
+                  Przejdź na Premium
+                </Button>
+              </Link>
+            </div>
+          </div>
+        )}
+
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* No subscription limit alert needed - unlimited for all */}
+          {/* Subscription limit alert for warnings */}
+          {subscriptionCheck.canCreateInvoice && subscriptionCheck.currentCount >= 4 && (
+            <div className="bg-gradient-to-r from-yellow-900/40 to-orange-900/40 border border-yellow-500/30 rounded-lg p-4 flex gap-4">
+              <Info className="w-5 h-5 text-yellow-300 flex-shrink-0 mt-0.5" />
+              <div>
+                <p className="text-white font-semibold text-sm mb-1">Zbliżasz się do limitu</p>
+                <p className="text-yellow-200 text-xs">
+                  Masz {subscriptionCheck.limit - subscriptionCheck.currentCount} faktury pozostałe. Planuj przejście na Premium.
+                </p>
+              </div>
+            </div>
+          )}
           
           {/* Basic Info */}
           <Card className="bg-slate-800/50 backdrop-blur-sm border-blue-500/20 p-6 shadow-lg">
