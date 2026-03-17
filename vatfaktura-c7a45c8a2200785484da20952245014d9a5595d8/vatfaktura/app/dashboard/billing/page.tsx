@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation'
 import { useUser } from '@/hooks/useUser'
 import { useInvoices } from '@/app/invoice-context'
 import { SUBSCRIPTION_PLANS } from '@/lib/stripe'
-import { getInvoiceCountThisMonth } from '@/lib/subscription-limits'
+import { getInvoiceCountAfterMigration } from '@/lib/subscription-limits'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { ChevronLeft, CheckCircle } from 'lucide-react'
@@ -31,7 +31,7 @@ export default function BillingPage() {
   const currentPlan = user.subscription?.plan || 'free'
   const planDetails = SUBSCRIPTION_PLANS[currentPlan as keyof typeof SUBSCRIPTION_PLANS]
   const userInvoices = invoices.filter(inv => inv.userId === user.id)
-  const invoicesThisMonth = getInvoiceCountThisMonth(userInvoices)
+  const invoicesThisMonth = getInvoiceCountAfterMigration(userInvoices, user.subscription?.migrationDate || new Date())
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
