@@ -46,6 +46,7 @@ export function registerUser(
     firstName?: string
     lastName?: string
     pesel?: string
+    plan?: PlanType
   }
 ) {
   if (users.has(email)) {
@@ -76,7 +77,7 @@ export function registerUser(
     pesel: options.pesel || '',
     createdAt: new Date(),
     subscription: {
-      plan: 'basic',
+      plan: options.plan || 'basic',
       invoicesCreatedAfterMigration: 0,
       migrationDate: new Date(),
     } as UserSubscription,

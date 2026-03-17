@@ -3,7 +3,7 @@ import { registerUser } from '@/lib/users-store'
 
 export async function POST(request: NextRequest) {
   try {
-    const { email, password, accountType, company, nip, firstName, lastName, pesel } = await request.json()
+    const { email, password, accountType, company, nip, firstName, lastName, pesel, plan } = await request.json()
 
     if (!email || !password || !accountType) {
       return NextResponse.json(
@@ -40,6 +40,7 @@ export async function POST(request: NextRequest) {
       firstName,
       lastName,
       pesel,
+      plan: (plan === 'premium' ? 'premium' : 'basic') as 'basic' | 'premium',
     })
 
     const token = Buffer.from(JSON.stringify({ userId: user.userId, email })).toString('base64')

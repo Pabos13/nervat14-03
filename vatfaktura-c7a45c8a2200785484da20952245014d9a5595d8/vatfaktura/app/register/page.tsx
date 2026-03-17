@@ -55,8 +55,8 @@ export default function RegisterPage() {
     try {
       const body =
         accountType === 'private'
-          ? { email, password, accountType, firstName, lastName, pesel, company: `${firstName} ${lastName}`, nip: '' }
-          : { email, password, accountType, company, nip, firstName: '', lastName: '', pesel: '' }
+          ? { email, password, accountType, firstName, lastName, pesel, company: `${firstName} ${lastName}`, nip: '', plan: planFromUrl }
+          : { email, password, accountType, company, nip, firstName: '', lastName: '', pesel: '', plan: planFromUrl }
 
       const response = await fetch('/api/auth/register', {
         method: 'POST',
