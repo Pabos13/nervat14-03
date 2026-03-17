@@ -51,7 +51,7 @@ export default function CreateInvoicePage() {
     
     if (user) {
       const userInvoices = invoices.filter(inv => inv.userId === user.id)
-      const count = getInvoiceCountAfterMigration(userInvoices, user.subscription.migrationDate)
+      const count = getInvoiceCountAfterMigration(userInvoices, user.subscription?.migrationDate || new Date())
       const planType = user.subscription?.plan || 'basic'
       const check = checkSubscriptionLimit(planType, count)
       setSubscriptionCheck(check)
