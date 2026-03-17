@@ -36,7 +36,11 @@ export default function PricingPage() {
       const response = await fetch('/api/lemon-squeezy/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ plan: 'premium' }),
+        body: JSON.stringify({ 
+          plan: 'premium',
+          email: user.email,
+          userId: user.id
+        }),
       })
 
       const data = await response.json()
