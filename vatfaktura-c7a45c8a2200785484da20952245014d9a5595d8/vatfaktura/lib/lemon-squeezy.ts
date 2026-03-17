@@ -1,11 +1,25 @@
 // Konfiguracja Lemon Squeezy
 export function getLemonSqueezyConfig() {
-  return {
+  const config = {
     apiKey: process.env.LEMON_SQUEEZY_API_KEY || '',
     webhookSecret: process.env.LEMON_SQUEEZY_WEBHOOK_SECRET || '',
     storeId: process.env.LEMON_SQUEEZY_STORE_ID || '',
     premiumProductId: process.env.LEMON_SQUEEZY_PREMIUM_PRODUCT_ID || '',
   }
+  
+  console.log('[v0] Lemon Squeezy config:', {
+    apiKey: config.apiKey?.substring(0, 20) + '...' || 'NOT SET',
+    storeId: config.storeId || 'NOT SET',
+    premiumProductId: config.premiumProductId || 'NOT SET',
+    webhookSecret: config.webhookSecret?.substring(0, 10) + '...' || 'NOT SET',
+    env_vars_sample: {
+      LEMON_SQUEEZY_API_KEY: process.env.LEMON_SQUEEZY_API_KEY?.substring(0, 20),
+      LEMON_SQUEEZY_STORE_ID: process.env.LEMON_SQUEEZY_STORE_ID,
+      LEMON_SQUEEZY_PREMIUM_PRODUCT_ID: process.env.LEMON_SQUEEZY_PREMIUM_PRODUCT_ID,
+    }
+  })
+  
+  return config
 }
 
 // Pricing plans in Lemon Squeezy
