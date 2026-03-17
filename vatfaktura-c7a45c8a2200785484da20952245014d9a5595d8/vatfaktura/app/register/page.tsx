@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
@@ -14,6 +14,9 @@ type AccountType = 'private' | 'business'
 
 export default function RegisterPage() {
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const planFromUrl = searchParams.get('plan') || 'basic'
+  
   const [accountType, setAccountType] = useState<AccountType>('private')
   const [email, setEmail] = useState('')
   const [firstName, setFirstName] = useState('')
@@ -82,6 +85,28 @@ export default function RegisterPage() {
       }
 
       await new Promise(resolve => setTimeout(resolve, 100))
+      
+      // Jeśli użytkownik wybrał Premium z pricing page, przejdź do checkout
+      if (planFromUrl === 'premium') {
+        try {
+          const checkoutResponse = await fetch('/api/lemon-squeezy/checkout', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ plan: 'premium' }),
+          })
+          
+          if (checkoutResponse.ok) {
+            const checkoutData = await checkoutResponse.json()
+            if (checkoutData.checkoutUrl) {
+              window.location.href = checkoutData.checkoutUrl
+              return
+            }
+          }
+        } catch (err) {
+          console.error('Error creating checkout:', err)
+        }
+      }
+      
       router.push('/dashboard')
     } catch (err) {
       setError('Błąd sieci - spróbuj ponownie')
@@ -99,10 +124,14 @@ export default function RegisterPage() {
 
       <div className="w-full max-w-md relative z-10">
         <div className="mb-6 sm:mb-8 space-y-2 text-center">
-          <div className="inline-block px-3 sm:px-4 py-1 sm:py-2 bg-green-500/20 border border-green-500/50 rounded-full">
-            <span className="text-xs sm:text-sm font-semibold text-green-300">100% BEZPŁATNIE • ZAWSZE</span>
+          <div className="inline-block px-3 sm:px-4 py-1 sm:py-2 bg-blue-500/20 border border-blue-500/50 rounded-full">
+            <span className="text-xs sm:text-sm font-semibold text-blue-300">
+              {planFromUrl === 'premium' ? 'UPGRADE DO PREMIUM' : '5 FAKTUR ZA DARMO'}
+            </span>
           </div>
-          <p className="text-xs sm:text-sm text-slate-300">Bez karty kredytowej • Bez limitów • Zawsze darmowe</p>
+          <p className="text-xs sm:text-sm text-slate-300">
+            {planFromUrl === 'premium' ? 'Nieograniczone faktury • Pełen dostęp' : 'Bez karty kredytowej • Zacznij natychmiast'}
+          </p>
         </div>
 
         <Card className="bg-slate-800/50 backdrop-blur-xl border border-blue-500/20 shadow-2xl shadow-blue-500/10 hover:shadow-blue-500/20 transition-all duration-300">
@@ -113,7 +142,11 @@ export default function RegisterPage() {
               </div>
             </div>
             <CardTitle className="text-white text-2xl sm:text-3xl font-bold">Rejestracja</CardTitle>
-            <CardDescription className="text-sm text-blue-200/60 mt-2">Wybierz typ konta i załóż je bezpłatnie</CardDescription>
+            <CardDescription className="text-sm text-blue-200/60 mt-2">
+              {planFromUrl === 'premium' 
+                ? 'Załóż konto i przejdź do płatności Premium'
+                : 'Wybierz typ konta i załóż je za darmo'}
+            </CardDescription>
           </CardHeader>
 
           <CardContent className="px-6 pb-6">

@@ -13,9 +13,19 @@ export default function PricingPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
+  const handleBasicPlan = () => {
+    if (!user) {
+      // Niezalogowany - idź do rejestracji
+      window.location.href = '/register'
+      return
+    }
+    // Zalogowany - już ma Podstawowy, nic nie rób
+  }
+
   const handleUpgradeToPremium = async () => {
     if (!user) {
-      window.location.href = '/register'
+      // Niezalogowany - idź do checkoutu z emailem
+      window.location.href = '/register?plan=premium'
       return
     }
 
@@ -73,6 +83,7 @@ export default function PricingPage() {
             description={PRICING_PLANS.BASIC.description}
             features={PRICING_PLANS.BASIC.features}
             isPurchased={user?.subscription?.plan === 'basic'}
+            onSelectPlan={handleBasicPlan}
           />
           <PricingCard
             name={PRICING_PLANS.PREMIUM.name}
