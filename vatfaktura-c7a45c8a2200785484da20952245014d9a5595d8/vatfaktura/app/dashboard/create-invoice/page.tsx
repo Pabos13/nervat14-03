@@ -199,7 +199,6 @@ export default function CreateInvoicePage() {
               canCreateInvoice={subscriptionCheck.canCreateInvoice}
               currentCount={subscriptionCheck.currentCount}
               limit={subscriptionCheck.limit}
-              message={subscriptionCheck.message}
               planId={user?.subscription?.plan || 'basic'}
             />
           )}
