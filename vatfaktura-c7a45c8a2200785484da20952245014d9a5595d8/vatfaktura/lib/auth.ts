@@ -4,12 +4,14 @@
  */
 
 export interface UserSubscription {
-  plan: 'free' | 'pro' | 'enterprise'
-  stripeCustomerId?: string
-  stripeSubscriptionId?: string
+  plan: 'basic' | 'premium'
+  lemonSqueezyCustomerId?: string
+  lemonSqueezySubscriptionId?: string
+  subscriptionStatus?: 'active' | 'paused' | 'cancelled' | 'expired'
   currentPeriodStart?: Date
   currentPeriodEnd?: Date
-  invoicesUsedThisMonth: number
+  invoicesCreatedAfterMigration: number
+  migrationDate: Date
 }
 
 export type AccountType = 'private' | 'business'
