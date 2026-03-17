@@ -102,6 +102,10 @@ const invoiceFaqs = [
     answer: 'Plan Podstawowy to darmowy plan z limitem 5 faktur na całe konto (nie miesięczne). Po wyczerpaniu limitu możesz: (1) upgrade do Premium za 99 PLN/miesiąc, (2) czekać aż inni użytkownicy będą chcieli kupić faktury od Ciebie albo (3) pozostać na planie Podstawowym bez dodatkowych faktur.'
   },
   {
+    question: 'Co to jest plan Podstawowy?',
+    answer: 'Plan Podstawowy to darmowy plan z limitem 5 faktur na całe konto (nie miesięczne). Po wyczerpaniu limitu możesz: (1) upgrade do Premium za 99 PLN/miesiąc, (2) czekać aż inni użytkownicy będą chcieli kupić faktury od Ciebie albo (3) pozostać na planie Podstawowym bez dodatkowych faktur.'
+  },
+  {
     question: 'Co to jest plan Premium?',
     answer: 'Plan Premium to 99 PLN/miesiąc i daje Ci nieograniczoną liczbę faktur, dostęp do wszystkich funkcji oraz priorytetowe wsparcie. Możesz anulować w każdej chwili.'
   },
