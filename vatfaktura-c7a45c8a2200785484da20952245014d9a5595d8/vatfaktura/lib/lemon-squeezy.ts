@@ -18,7 +18,7 @@ export const PRICING_PLANS = {
     name: 'Premium',
     price: 99,
     description: 'Nieograniczone faktury',
-    lemonSqueezyProductId: getLemonSqueezyPremiumProductId(),
+    // Note: lemonSqueezyProductId is fetched at runtime in createLemonSqueezyCheckoutSession, not here
     features: [
       'Nieograniczone faktury',
       'Wszystkie funkcje',
@@ -38,7 +38,7 @@ export async function createLemonSqueezyCheckoutSession(
     throw new Error('LEMON_SQUEEZY_API_KEY not configured - set it in environment variables')
   }
 
-  const productId = PRICING_PLANS.PREMIUM.lemonSqueezyProductId
+  const productId = getLemonSqueezyPremiumProductId()
   if (!productId) {
     throw new Error('LEMON_SQUEEZY_PREMIUM_PRODUCT_ID not configured - set it in environment variables')
   }
