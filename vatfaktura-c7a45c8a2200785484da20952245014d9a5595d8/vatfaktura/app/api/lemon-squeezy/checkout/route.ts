@@ -1,19 +1,24 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createLemonSqueezyCheckoutSession } from '@/lib/lemon-squeezy'
+import { getLemonSqueezyApiKey, getLemonSqueezyStoreId, getLemonSqueezyPremiumProductId } from '@/lib/env'
 
 export async function POST(request: NextRequest) {
   try {
     const { plan, userId, email } = await request.json()
 
-    // Debug: Check if env vars are available
+    // Debug: Check if env vars are available using getter functions
     console.log('[v0] Checkout request:', { plan, userId, email })
     console.log('[v0] Checking env vars:')
-    console.log('[v0]   LEMON_SQUEEZY_API_KEY:', process.env.LEMON_SQUEEZY_API_KEY ? '***SET***' : 'MISSING')
-    console.log('[v0]   LEMON_SQUEEZY_STORE_ID:', process.env.LEMON_SQUEEZY_STORE_ID || 'MISSING')
-    console.log('[v0]   LEMON_SQUEEZY_PREMIUM_PRODUCT_ID:', process.env.LEMON_SQUEEZY_PREMIUM_PRODUCT_ID || 'MISSING')
+    const apiKey = getLemonSqueezyApiKey()
+    const storeId = getLemonSqueezyStoreId()
+    const productId = getLemonSqueezyPremiumProductId()
+    
+    console.log('[v0]   LEMON_SQUEEZY_API_KEY:', apiKey ? '***SET***' : 'MISSING')
+    console.log('[v0]   LEMON_SQUEEZY_STORE_ID:', storeId || 'MISSING')
+    console.log('[v0]   LEMON_SQUEEZY_PREMIUM_PRODUCT_ID:', productId || 'MISSING')
 
     // If env vars missing, return helpful error
-    if (!process.env.LEMON_SQUEEZY_API_KEY || !process.env.LEMON_SQUEEZY_STORE_ID || !process.env.LEMON_SQUEEZY_PREMIUM_PRODUCT_ID) {
+    if (!apiKey || !storeId || !productId) {
       console.error('[v0] Missing Lemon Squeezy environment variables! Configure in Vercel Settings → Environment Variables')
       return NextResponse.json(
         { 
