@@ -199,7 +199,7 @@ export default function CreateInvoicePage() {
               canCreateInvoice={subscriptionCheck.canCreateInvoice}
               currentCount={subscriptionCheck.currentCount}
               limit={subscriptionCheck.limit}
-              message={subscriptionCheck.message}
+              message={subscriptionCheck.message || 'Limit faktur wyczerpany'}
               planId={user?.subscription?.plan || 'basic'}
             />
           )}
