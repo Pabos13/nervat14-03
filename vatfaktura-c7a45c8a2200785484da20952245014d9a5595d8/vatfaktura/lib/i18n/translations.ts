@@ -58,12 +58,12 @@ export const translations: Record<Language, Record<string, string>> = {
     'nav.closeMenu': 'Zamknij menu',
 
     // Home Page Hero
-    'home.badge': '100% Bezpłatnie na zawsze',
+    'home.badge': 'Podstawowe funkcje za darmo',
     'home.heroTitle1': 'Fakturowanie',
     'home.heroTitle2': 'bez limitów',
     'home.heroTitle3': 'bez dodatkowych kosztów',
     'home.heroDesc': 'Profesjonalna, nowoczesna platforma do tworzenia faktur z pełnymi funkcjami. Żadnych limitów, żadnej karty kredytowej, żadnych ukrytych opłat.',
-    'home.signalsItem1': 'Bezpłatnie zawsze',
+    'home.signalsItem1': 'Plan darmowy',
     'home.signalsItem2': 'Bez limitów',
     'home.signalsItem3': 'Brak karty',
     'home.cta.start': 'Rozpocznij za darmo',
@@ -73,7 +73,7 @@ export const translations: Record<Language, Record<string, string>> = {
     'home.users': 'aktywnych użytkowników',
     'home.invoices': 'wystawionych faktur',
     'home.rating': 'średnia ocena',
-    'home.free': 'bezpłatnie na zawsze',
+    'home.free': 'plan darmowy dostępny',
 
     // Affiliate Disclosure
     'home.disclosure': 'Ujawnienie:',
@@ -226,12 +226,12 @@ export const translations: Record<Language, Record<string, string>> = {
     'nav.closeMenu': 'Закрити меню',
 
     // Home Page Hero
-    'home.badge': '100% Безкоштовно на завжди',
+    'home.badge': 'Базові функції безкоштовно',
     'home.heroTitle1': 'Виставлення рахунків',
     'home.heroTitle2': 'без обмежень',
     'home.heroTitle3': 'без додаткових витрат',
     'home.heroDesc': 'Професійна, сучасна платформа для створення рахунків з повним функціоналом. Жодних обмежень, жод��ої кредитної карти, жодних прихованих зборів.',
-    'home.signalsItem1': 'Безкоштовно на завжди',
+    'home.signalsItem1': 'Безкоштовний план',
     'home.signalsItem2': 'Без обмежень',
     'home.signalsItem3': 'Без карти',
     'home.cta.start': 'Почніть безкоштовно',
@@ -241,7 +241,7 @@ export const translations: Record<Language, Record<string, string>> = {
     'home.users': 'активних користувачів',
     'home.invoices': 'виставлених рахунків',
     'home.rating': 'середня оцінка',
-    'home.free': 'безкоштовно на завжди',
+    'home.free': 'безкоштовний план',
 
     // Affiliate Disclosure
     'home.disclosure': 'Розкриття інформації:',
