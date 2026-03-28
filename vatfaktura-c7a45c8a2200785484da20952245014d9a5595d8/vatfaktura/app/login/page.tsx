@@ -71,7 +71,7 @@ export default function LoginPage() {
         {/* Trust Signals Above Card */}
         <div className="absolute top-6 sm:top-12 left-1/2 transform -translate-x-1/2">
           <div className="inline-block px-2 sm:px-3 py-1 bg-green-500/20 border border-green-500/50 rounded-full">
-            <span className="text-xs font-semibold text-green-300">100% BEZPŁATNIE • BRAK LIMITÓW</span>
+            <span className="text-xs font-semibold text-green-300">5 FAKTUR ZA DARMO • PREMIUM 99 PLN/msc</span>
           </div>
         </div>
 

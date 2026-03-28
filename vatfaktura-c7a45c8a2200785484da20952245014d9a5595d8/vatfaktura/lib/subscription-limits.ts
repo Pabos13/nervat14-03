@@ -3,18 +3,43 @@ export interface SubscriptionLimitCheck {
   currentCount: number
   limit: number
   message?: string
+  isPremium: boolean
 }
+
+export const FREE_INVOICE_LIMIT = 5
 
 export function checkSubscriptionLimit(
   planId: string,
   currentInvoiceCount: number
 ): SubscriptionLimitCheck {
-  // All plans are unlimited now - no limits enforced
-  return {
-    canCreateInvoice: true,
-    currentCount: currentInvoiceCount,
-    limit: Infinity,
+  const isPremium = planId === 'premium'
+  
+  // Premium users have unlimited invoices
+  if (isPremium) {
+    return {
+      canCreateInvoice: true,
+      currentCount: currentInvoiceCount,
+      limit: Infinity,
+      isPremium: true,
+    }
   }
+  
+  // Free users: 5 invoices limit (total, not monthly)
+  const canCreate = currentInvoiceCount < FREE_INVOICE_LIMIT
+  
+  return {
+    canCreateInvoice: canCreate,
+    currentCount: currentInvoiceCount,
+    limit: FREE_INVOICE_LIMIT,
+    isPremium: false,
+    message: canCreate 
+      ? `Wykorzystano ${currentInvoiceCount} z ${FREE_INVOICE_LIMIT} darmowych faktur`
+      : 'Osiągnąłeś limit 5 darmowych faktur. Wykup Premium aby kontynuować.',
+  }
+}
+
+export function getInvoiceCountTotal(invoices: any[]): number {
+  return invoices.length
 }
 
 export function getInvoiceCountThisMonth(invoices: any[]): number {
@@ -29,6 +54,8 @@ export function getInvoiceCountThisMonth(invoices: any[]): number {
 }
 
 export function getUpgradeMessage(planId: string): string {
-  // No upgrades needed - everything is free
-  return 'Wszystkie plany są teraz bezpłatne - korzystaj bez limitów!'
+  if (planId === 'premium') {
+    return 'Masz aktywny plan Premium - nieograniczone faktury!'
+  }
+  return 'Wykup Premium za 99 zł/msc aby tworzyć nieograniczoną liczbę faktur.'
 }

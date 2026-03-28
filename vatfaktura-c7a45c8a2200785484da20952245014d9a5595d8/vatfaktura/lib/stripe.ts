@@ -7,12 +7,12 @@ export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
 export const SUBSCRIPTION_PLANS = {
   free: {
     id: 'free',
-    name: 'Free',
+    name: 'Starter',
     price: 0,
-    invoicesPerMonth: 10,
+    invoicesTotal: 5,
     stripePriceId: 'price_free',
     features: [
-      'Nieograniczone faktury',
+      '5 faktur za darmo',
       'Eksport do PDF',
       'Zarządzanie kontrahentami',
       'Raporty VAT',
@@ -20,34 +20,23 @@ export const SUBSCRIPTION_PLANS = {
       'Historia i archiwum',
     ],
   },
-  pro: {
-    id: 'pro',
-    name: 'Pro',
-    price: 9.99,
-    invoicesPerMonth: 100,
-    stripePriceId: 'price_pro',
+  premium: {
+    id: 'premium',
+    name: 'Premium',
+    price: 99,
+    invoicesTotal: -1,
+    stripePriceId: 'price_premium',
+    paypalPlanId: 'P-PREMIUM-MONTHLY',
     features: [
-      'Wszystkie funkcje z Free',
+      'Nieograniczone faktury',
+      'Wszystkie funkcje Starter',
       'Zaawansowane szablony',
-      'Opóźnione fakturowanie',
       'Automatyczne przypomnienia',
       'Priorytetowe wsparcie',
       'Zaawansowana analityka',
     ],
   },
-  enterprise: {
-    id: 'enterprise',
-    name: 'Enterprise',
-    price: 29.99,
-    invoicesPerMonth: -1,
-    stripePriceId: 'price_enterprise',
-    features: [
-      'Wszystkie funkcje z Pro',
-      'Dedykowany wspierający',
-      'API dostęp',
-      'Integracje niestandardowe',
-      'SLA gwarancji',
-      'Wielopoziomowe konta',
-    ],
-  },
 };
+
+export const PREMIUM_PRICE_PLN = 99;
+export const PAYPAL_ENABLED = true;

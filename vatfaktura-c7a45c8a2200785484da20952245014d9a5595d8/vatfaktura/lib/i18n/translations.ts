@@ -58,16 +58,16 @@ export const translations: Record<Language, Record<string, string>> = {
     'nav.closeMenu': 'Zamknij menu',
 
     // Home Page Hero
-    'home.badge': '100% Bezpłatnie na zawsze',
+    'home.badge': '5 faktur za darmo',
     'home.heroTitle1': 'Fakturowanie',
-    'home.heroTitle2': 'bez limitów',
-    'home.heroTitle3': 'bez dodatkowych kosztów',
-    'home.heroDesc': 'Profesjonalna, nowoczesna platforma do tworzenia faktur z pełnymi funkcjami. Żadnych limitów, żadnej karty kredytowej, żadnych ukrytych opłat.',
-    'home.signalsItem1': 'Bezpłatnie zawsze',
-    'home.signalsItem2': 'Bez limitów',
-    'home.signalsItem3': 'Brak karty',
-    'home.cta.start': 'Rozpocznij za darmo',
-    'home.cta.login': 'Zaloguj się',
+    'home.heroTitle2': 'proste i szybkie',
+    'home.heroTitle3': 'Premium od 99 PLN/msc',
+    'home.heroDesc': 'Profesjonalna platforma do tworzenia faktur. Pierwsze 5 faktur za darmo, potem Premium z nieograniczonymi fakturami.',
+    'home.signalsItem1': '5 faktur gratis',
+    'home.signalsItem2': 'Premium 99 PLN',
+    'home.signalsItem3': 'PayPal',
+    'home.cta.start': 'Zacznij za darmo',
+    'home.cta.login': 'Zaloguj sie',
     
     // Social Proof
     'home.users': 'aktywnych użytkowników',
@@ -225,15 +225,15 @@ export const translations: Record<Language, Record<string, string>> = {
     'nav.openMenu': 'Відкрити меню',
     'nav.closeMenu': 'Закрити меню',
 
-    // Home Page Hero
-    'home.badge': '100% Безкоштовно на завжди',
+// Home Page Hero
+    'home.badge': '5 рахунків безкоштовно',
     'home.heroTitle1': 'Виставлення рахунків',
-    'home.heroTitle2': 'без обмежень',
-    'home.heroTitle3': 'без додаткових витрат',
-    'home.heroDesc': 'Професійна, сучасна платформа для створення рахунків з повним функціоналом. Жодних обмежень, жод��ої кредитної карти, жодних прихованих зборів.',
-    'home.signalsItem1': 'Безкоштовно на завжди',
-    'home.signalsItem2': 'Без обмежень',
-    'home.signalsItem3': 'Без карти',
+    'home.heroTitle2': 'просто і швидко',
+    'home.heroTitle3': 'Premium від 99 PLN/міс',
+    'home.heroDesc': 'Професійна платформа для створення рахунків. Перші 5 рахунків безкоштовно, потім Premium з необмеженими рахунками.',
+    'home.signalsItem1': '5 рахунків безкоштовно',
+    'home.signalsItem2': 'Premium 99 PLN',
+    'home.signalsItem3': 'PayPal',
     'home.cta.start': 'Почніть безкоштовно',
     'home.cta.login': 'Увійти',
     
@@ -283,7 +283,7 @@ export const translations: Record<Language, Record<string, string>> = {
     'home.newFeature2': 'Панель управління ZUS',
     'home.newFeature2Desc': 'Керуйте внесками ZUS, відстежуйте статус платежів та отримуйте підтвердження онлайн.',
     'home.newFeature3': 'Інтеграція kSEF',
-    'home.newFeature3Desc': 'Повна інтеграція з Національною системою електронних рахунків. Надсилайте рахунки до kSEF одним кліком.',
+    'home.newFeature3Desc': 'Повна інтеграція з Національною системою електронних рахунків. Надсилайте ра��унки до kSEF одним кліком.',
 
     // Jak to działa Section
     'home.howTitle': 'Як це працює?',

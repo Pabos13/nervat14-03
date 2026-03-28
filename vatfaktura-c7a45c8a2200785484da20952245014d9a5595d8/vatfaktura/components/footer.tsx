@@ -9,7 +9,7 @@ export function Footer() {
           <div>
             <h4 className="text-white font-semibold mb-4">O nas</h4>
             <p className="text-sm text-blue-200/60 leading-relaxed">
-              Bezpłatne narzędzie do fakturowania z integracją kSEF. Stworzony dla małych firm i przedsiębiorców.
+              Narzedzie do fakturowania z integracja kSEF. 5 faktur za darmo, Premium 99 PLN/msc.
             </p>
           </div>
 

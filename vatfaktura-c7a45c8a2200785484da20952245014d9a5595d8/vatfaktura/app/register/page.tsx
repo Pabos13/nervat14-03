@@ -100,9 +100,9 @@ export default function RegisterPage() {
       <div className="w-full max-w-md relative z-10">
         <div className="mb-6 sm:mb-8 space-y-2 text-center">
           <div className="inline-block px-3 sm:px-4 py-1 sm:py-2 bg-green-500/20 border border-green-500/50 rounded-full">
-            <span className="text-xs sm:text-sm font-semibold text-green-300">100% BEZPŁATNIE • ZAWSZE</span>
+            <span className="text-xs sm:text-sm font-semibold text-green-300">5 FAKTUR ZA DARMO</span>
           </div>
-          <p className="text-xs sm:text-sm text-slate-300">Bez karty kredytowej • Bez limitów • Zawsze darmowe</p>
+          <p className="text-xs sm:text-sm text-slate-300">Bez karty kredytowej • Premium od 99 PLN/msc</p>
         </div>
 
         <Card className="bg-slate-800/50 backdrop-blur-xl border border-blue-500/20 shadow-2xl shadow-blue-500/10 hover:shadow-blue-500/20 transition-all duration-300">

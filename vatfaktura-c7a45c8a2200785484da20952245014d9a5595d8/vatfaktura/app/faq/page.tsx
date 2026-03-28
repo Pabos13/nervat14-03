@@ -55,8 +55,8 @@ const pitFaqs = [
     answer: 'Możesz podpisać deklarację kwalifikowanym podpisem elektronicznym (certyfikat kwalifikowany) lub danymi autoryzującymi (kwota przychodu z roku poprzedniego). Obydwie metody są akceptowane przez Krajową Administrację Skarbową.'
   },
   {
-    question: 'Czy rozliczenie PIT w VAT Faktura jest bezpłatne?',
-    answer: 'Tak, rozliczanie wszystkich deklaracji PIT jest całkowicie bezpłatne — bez limitów, bez abonamentów, bez karty kredytowej. To część pakietu VAT Faktura dostępnego 100% za darmo.'
+    question: 'Ile kosztuje VAT Faktura?',
+    answer: 'Pierwsze 5 faktur jest calkowicie za darmo. Po wykorzystaniu limitu mozesz wykupic Premium za 99 PLN/miesiac aby tworzyc nieograniczona liczbe faktur. Rozliczanie PIT, kalkulatory i inne narzedzia pozostaja bezplatne dla wszystkich.'
   },
   {
     question: 'Kiedy jest termin złożenia PIT?',

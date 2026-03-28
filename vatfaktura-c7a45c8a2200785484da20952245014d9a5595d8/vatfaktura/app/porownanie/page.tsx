@@ -12,8 +12,8 @@ export const metadata: Metadata = {
 
 export default function ComparisonPage() {
   const features = [
-    { name: 'Cena', vatFaktura: '100% bezpłatnie', infakt: 'Od 9 zł/m-c', wychowankowie: 'Od 29 zł/m-c' },
-    { name: 'Faktury bez limitów', vatFaktura: true, infakt: true, wychowankowie: true },
+    { name: 'Cena', vatFaktura: '5 faktur gratis, Premium 99 zl/msc', infakt: 'Od 9 zl/m-c', wychowankowie: 'Od 29 zl/m-c' },
+    { name: 'Faktury bez limitów', vatFaktura: 'Premium', infakt: true, wychowankowie: true },
     { name: 'Integracja KSEF', vatFaktura: true, infakt: true, wychowankowie: true },
     { name: 'Eksport PDF', vatFaktura: true, infakt: true, wychowankowie: true },
     { name: 'E-podpis', vatFaktura: false, infakt: true, wychowankowie: true },
@@ -150,13 +150,13 @@ export default function ComparisonPage() {
           </div>
 
           <div className="mt-16 bg-gradient-to-r from-green-600/20 to-cyan-600/20 border-2 border-green-500/50 rounded-lg p-12 text-center">
-            <h2 className="text-3xl font-bold text-white mb-4">Dlaczego wybrać VAT Faktura?</h2>
+            <h2 className="text-3xl font-bold text-white mb-4">Dlaczego wybrac VAT Faktura?</h2>
             <p className="text-lg text-green-200/80 mb-8">
-              100% bezpłatnie, bez limitów, bez zbędnych funkcji. Wszystko czego potrzebujesz do fakturowania bez dodatkowych kosztów.
+              5 faktur za darmo na start, potem Premium za 99 PLN/msc. Wszystko czego potrzebujesz do fakturowania.
             </p>
             <Link href="/register">
               <Button className="bg-gradient-to-r from-green-600 to-cyan-600 hover:from-green-700 hover:to-cyan-700 shadow-lg shadow-green-500/50 font-bold text-lg px-8 py-3">
-                Zaloguj się i zacznij za darmo
+                Zacznij za darmo
               </Button>
             </Link>
           </div>

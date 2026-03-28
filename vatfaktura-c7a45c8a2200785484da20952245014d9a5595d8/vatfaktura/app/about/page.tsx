@@ -61,7 +61,7 @@ export default function AboutPage() {
             O VAT Faktura
           </h1>
           <p className="text-xl text-blue-200/70 max-w-2xl mx-auto leading-relaxed">
-            Tworzymy bezpłatne narzędzia finansowe dla polskich przedsiębiorców. Faktury, KSEF i rozliczenia PIT — wszystko w jednym miejscu, 100% za darmo.
+            Tworzymy narzedzia finansowe dla polskich przedsiebiorcow. 5 faktur za darmo, Premium od 99 PLN/msc. KSEF i rozliczenia PIT.
           </p>
         </div>
       </section>
@@ -93,14 +93,14 @@ export default function AboutPage() {
                 Zaczęliśmy od generatora faktur, który działał w przeglądarce bez rejestracji i serwerów. Dziś obsługujemy pełne rozliczenia PIT (PIT-37, PIT-36, PIT-36L, PIT-28, PIT-38 i inne), integrację z KSEF oraz wysyłkę e-Deklaracji z podpisem elektronicznym.
               </p>
               <p className="text-blue-200/80 leading-relaxed text-lg">
-                Utrzymujemy się z reklam i programów partnerskich — dzięki czemu możemy oferować wszystkie funkcje całkowicie bezpłatnie, bez limitów i bez kart kredytowych.
+                Oferujemy 5 darmowych faktur na start, a potem Premium za 99 PLN/miesiac z nieograniczona liczba faktur. Platnosc przez PayPal.
               </p>
             </div>
             <div className="bg-gradient-to-br from-blue-600/15 to-cyan-600/15 border border-blue-500/30 rounded-2xl p-8">
-              <h3 className="text-lg font-bold text-white mb-5">Co oferujemy bezpłatnie</h3>
+              <h3 className="text-lg font-bold text-white mb-5">Co oferujemy</h3>
               <ul className="space-y-3">
                 {[
-                  'Nieograniczone faktury VAT i pro forma',
+                  '5 faktur za darmo, potem Premium 99 PLN/msc',
                   'Integracja z KSEF (Krajowy System e-Faktur)',
                   'Rozliczenie PIT-37, PIT-36, PIT-36L, PIT-28, PIT-38, PIT-39',
                   'Podpis elektroniczny i wysyłka do urzędu skarbowego',

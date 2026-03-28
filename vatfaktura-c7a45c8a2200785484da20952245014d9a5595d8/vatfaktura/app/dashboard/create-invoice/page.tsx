@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Card } from '@/components/ui/card'
 import { SubscriptionLimitAlert } from '@/components/subscription-limit-alert'
-import { checkSubscriptionLimit, getInvoiceCountThisMonth } from '@/lib/subscription-limits'
+import { checkSubscriptionLimit, getInvoiceCountTotal } from '@/lib/subscription-limits'
 import { Plus, Trash2, ChevronLeft, Eye, Download, Printer, User, Building2, Info } from 'lucide-react'
 import Link from 'next/link'
 
@@ -21,6 +21,7 @@ export default function CreateInvoicePage() {
     canCreateInvoice: true,
     currentCount: 0,
     limit: 5,
+    isPremium: false,
   })
 
   // Client type: 'business' (firma z NIP) or 'private' (osoba prywatna bez NIP)
@@ -51,7 +52,7 @@ export default function CreateInvoicePage() {
     
     if (user) {
       const userInvoices = invoices.filter(inv => inv.userId === user.id)
-      const count = getInvoiceCountThisMonth(userInvoices)
+      const count = getInvoiceCountTotal(userInvoices)
       const planId = user.subscription?.plan || 'free'
       const check = checkSubscriptionLimit(planId, count)
       setSubscriptionCheck(check)
@@ -193,7 +194,15 @@ export default function CreateInvoicePage() {
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10">
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* No subscription limit alert needed - unlimited for all */}
+          {/* Subscription limit alert */}
+          <SubscriptionLimitAlert
+            canCreateInvoice={subscriptionCheck.canCreateInvoice}
+            currentCount={subscriptionCheck.currentCount}
+            limit={subscriptionCheck.limit}
+            message={subscriptionCheck.message}
+            planId={user?.subscription?.plan || 'free'}
+            isPremium={subscriptionCheck.isPremium}
+          />
           
           {/* Basic Info */}
           <Card className="bg-slate-800/50 backdrop-blur-sm border-blue-500/20 p-6 shadow-lg">

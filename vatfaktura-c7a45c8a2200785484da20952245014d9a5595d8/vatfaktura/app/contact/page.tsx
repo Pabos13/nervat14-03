@@ -32,8 +32,8 @@ const topics = [
 
 const faq = [
   {
-    q: 'Czy VAT Faktura jest całkowicie bezpłatna?',
-    a: 'Tak, 100% bezpłatnie na zawsze — bez abonamentów, bez limitów faktur, bez karty kredytowej. Utrzymujemy się z reklam i programów partnerskich.',
+    q: 'Ile kosztuje VAT Faktura?',
+    a: 'Pierwsze 5 faktur jest calkowicie za darmo. Po wykorzystaniu limitu mozesz wykupic Premium za 99 PLN/miesiac. Platnosc przez PayPal.',
   },
   {
     q: 'Czy moje faktury są bezpieczne?',
