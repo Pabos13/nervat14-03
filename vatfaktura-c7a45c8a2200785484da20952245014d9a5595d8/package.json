@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "cd vatfaktura && next dev",
-    "build": "cd vatfaktura && next build",
-    "start": "cd vatfaktura && next start",
-    "lint": "cd vatfaktura && eslint ."
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint ."
   },
   "dependencies": {
     "@stripe/stripe-js": "^4.1.0",
